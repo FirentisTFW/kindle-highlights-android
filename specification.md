@@ -9,4 +9,54 @@ The user can import Kindle highlights based on `My Clippings.txt` file. These hi
 ## APP FEATURES
 - importing Kindle Highlights based on `My Clippings.txt` file
 - creating custom categories
-- assigning categories to highlights
+- assigning highlights to categories
+- displaying randomly selected highlights based on selected categories
+- setting desired categories and number of highligths to be shown every day
+
+## SCREENS
+1. Home
+- highlights for the day (list of items)
+
+2. Settings
+- number of highlights per day
+- desired categories
+
+3. Highlights browser
+- list of highlights
+
+4. Highlight details
+- full highlight text
+- categories
+- possibility to assign the highlight to categories
+
+5. Import highlights
+- from file from storage
+- filtering out bookmarks
+- combining highlights with notes
+- detecting and removing possible duplicates 
+- reviewing newly added highlights before accepting (?)
+
+6. Categories/Books + add new category
+- list of categories
+- category details (how many highlights assigned etc.)
+- possibility to add new category (bottom sheet?)
+
+## MODELS
+
+### Highlight
+- book - Book
+- categories - List(Category)
+- content - string
+- date - date or string
+- id - string
+- note - text (optional)
+
+### Book
+- author - string
+- id - string
+- title - string
+
+### Category
+- date (?) - date
+- id - string
+- name - string
