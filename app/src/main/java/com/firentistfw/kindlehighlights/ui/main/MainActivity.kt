@@ -1,12 +1,8 @@
 package com.firentistfw.kindlehighlights.ui.main
 
-import androidx.appcompat.app.AppCompatActivity
-import android.os.Bundle
 import com.firentistfw.kindlehighlights.R
+import com.firentistfw.kindlehighlights.common.BaseActivity
 
-class MainActivity : AppCompatActivity() {
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
-    }
+class MainActivity : BaseActivity() {
+    override val layoutResId = R.layout.activity_main
 }
