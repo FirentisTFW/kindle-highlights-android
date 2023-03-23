@@ -10,4 +10,6 @@ abstract class BaseActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(layoutResId)
     }
+
+    protected open fun initInteractions() {}
 }
