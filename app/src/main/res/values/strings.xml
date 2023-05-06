@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">Kindle Highlights</string>
+    <string name="quote">Quote</string>
+    <string name="note">Note</string>
+    <string name="book">Book</string>
+    <string name="date">Date</string>
+    <string name="categories">Categories</string>
+    <string name="highlightDetailsUpdateCategoriesButton">UPDATE CATEGORIES</string>
 </resources>
