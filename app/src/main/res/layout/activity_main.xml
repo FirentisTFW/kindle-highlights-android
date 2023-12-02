@@ -6,7 +6,13 @@
     android:layout_height="match_parent"
     tools:context=".ui.main.MainActivity">
 
-    // FIXME Remove hardcoded texts
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvHighlights"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="8dp"
+        android:padding="8dp"/>
+
     <com.google.android.material.button.MaterialButton
         android:id="@+id/btnHighlightDetails"
         android:layout_width="wrap_content"

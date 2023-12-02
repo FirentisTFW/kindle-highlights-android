@@ -2,10 +2,12 @@ package com.firentistfw.kindlehighlights.ui.main
 
 import android.content.Intent
 import android.os.Bundle
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.firentistfw.kindlehighlights.R
 import com.firentistfw.kindlehighlights.common.BaseActivity
 import com.firentistfw.kindlehighlights.common.Constants
 import com.firentistfw.kindlehighlights.common.mocks.Mocks
+import com.firentistfw.kindlehighlights.ui.common.DividerItemDecoration
 import com.firentistfw.kindlehighlights.ui.highlightdetails.HighlightDetailsActivity
 import com.firentistfw.kindlehighlights.ui.highlightdetails.HighlightDetailsArguments
 import kotlinx.android.synthetic.main.activity_main.*
@@ -19,6 +21,16 @@ class MainActivity : BaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         initInteractions()
+
+        rvHighlights.layoutManager = LinearLayoutManager(this)
+
+        // FIXME Remove mocks - get data from local storage via viewmodel
+        val highlights = listOf(Mocks.exampleHighlight, Mocks.exampleHighlight2)
+        val adapter = HighlightListAdapter(highlights)
+        rvHighlights.adapter = adapter
+
+        val dividerItemDecoration = DividerItemDecoration(rvHighlights.context)
+        rvHighlights.addItemDecoration(dividerItemDecoration)
     }
 
     override fun initInteractions() {
