@@ -5,7 +5,6 @@ import androidx.core.content.ContextCompat
 import com.firentistfw.kindlehighlights.R
 import com.firentistfw.kindlehighlights.common.BaseActivity
 import com.firentistfw.kindlehighlights.common.Constants
-import com.firentistfw.kindlehighlights.models.Highlight
 import com.firentistfw.kindlehighlights.models.authorAndTitleDisplay
 import kotlinx.android.synthetic.main.activity_highlight_details.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
