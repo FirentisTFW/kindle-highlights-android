@@ -7,9 +7,8 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.firentistfw.kindlehighlights.R
 import com.firentistfw.kindlehighlights.common.BaseFragment
 import com.firentistfw.kindlehighlights.common.DataState
+import com.firentistfw.kindlehighlights.databinding.FragmentHighlightListBinding
 import com.firentistfw.kindlehighlights.ui.common.DividerItemDecoration
-import kotlinx.android.synthetic.main.fragment_highlight_list.circularProgressBar
-import kotlinx.android.synthetic.main.fragment_highlight_list.rvHighlights
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class HighlightListFragment : BaseFragment() {
@@ -18,9 +17,11 @@ class HighlightListFragment : BaseFragment() {
 
     private val viewModel: HighlightListViewModel by viewModel()
     private val tag = "HighlightListFragment"
+    private lateinit var binding: FragmentHighlightListBinding
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        binding = FragmentHighlightListBinding.bind(view)
 
         initObservers()
         fetchHighlights()
@@ -28,8 +29,8 @@ class HighlightListFragment : BaseFragment() {
 
     private fun initObservers() {
         viewModel.dataState.observe(viewLifecycleOwner) { state ->
-            circularProgressBar.visibility = View.GONE;
-            rvHighlights.visibility = View.GONE;
+            binding.circularProgressBar.visibility = View.GONE
+            binding.rvHighlights.visibility = View.GONE
 
             when (state) {
                 is DataState.Error -> {
@@ -38,19 +39,19 @@ class HighlightListFragment : BaseFragment() {
                 }
 
                 is DataState.Loading -> {
-                    circularProgressBar.visibility = View.VISIBLE
+                    binding.circularProgressBar.visibility = View.VISIBLE
                 }
 
                 is DataState.Success -> {
-                    rvHighlights.visibility = View.VISIBLE
-                    rvHighlights.layoutManager = LinearLayoutManager(context)
+                    binding.rvHighlights.visibility = View.VISIBLE
+                    binding.rvHighlights.layoutManager = LinearLayoutManager(context)
 
                     val highlights = state.data
                     val adapter = HighlightListAdapter(highlights)
-                    rvHighlights.adapter = adapter
+                    binding.rvHighlights.adapter = adapter
 
-                    val dividerItemDecoration = DividerItemDecoration(rvHighlights.context)
-                    rvHighlights.addItemDecoration(dividerItemDecoration)
+                    val dividerItemDecoration = DividerItemDecoration(binding.rvHighlights.context)
+                    binding.rvHighlights.addItemDecoration(dividerItemDecoration)
                 }
             }
         }

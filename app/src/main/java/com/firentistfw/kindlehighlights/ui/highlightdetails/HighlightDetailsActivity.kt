@@ -5,29 +5,30 @@ import androidx.core.content.ContextCompat
 import com.firentistfw.kindlehighlights.R
 import com.firentistfw.kindlehighlights.common.BaseActivity
 import com.firentistfw.kindlehighlights.common.Constants
+import com.firentistfw.kindlehighlights.databinding.ActivityHighlightDetailsBinding
 import com.firentistfw.kindlehighlights.models.authorAndTitleDisplay
-import kotlinx.android.synthetic.main.activity_highlight_details.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class HighlightDetailsActivity : BaseActivity() {
-    override val layoutResId = R.layout.activity_highlight_details
-
     private val viewModel: HighlightDetailsViewModel by viewModel()
+    private lateinit var binding: ActivityHighlightDetailsBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        binding = ActivityHighlightDetailsBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+
+        binding.divider.background = ContextCompat.getDrawable(this, R.drawable.divider)
         fillInitialValues()
-        divider.background = ContextCompat.getDrawable(this, R.drawable.divider)
     }
 
     private fun fillInitialValues() {
         val arguments = intent.getParcelableExtra<HighlightDetailsArguments>(Constants.argumentsKey)
         val highlight = arguments?.highlight
 
-        quote.text = highlight?.content
-        note.text = highlight?.note
-        book.text = highlight?.book?.authorAndTitleDisplay
-        date.text = highlight?.date
+        binding.quote.text = highlight?.content
+        binding.note.text = highlight?.note
+        binding.book.text = highlight?.book?.authorAndTitleDisplay
+        binding.date.text = highlight?.date
     }
-
 }

@@ -3,15 +3,19 @@ package com.firentistfw.kindlehighlights.ui.main
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.firentistfw.kindlehighlights.R
+import com.firentistfw.kindlehighlights.databinding.ItemHighlightListCellBinding
 import com.firentistfw.kindlehighlights.models.Highlight
 
 class HighlightListAdapter(private val highlights: List<Highlight>) :
     RecyclerView.Adapter<HighlightListViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): HighlightListViewHolder {
-        val view = LayoutInflater.from(parent.context)
-            .inflate(R.layout.item_highlight_list_cell, parent, false)
-        return HighlightListViewHolder(view)
+        val binding =
+            ItemHighlightListCellBinding.inflate(
+                LayoutInflater.from(parent.context),
+                parent,
+                false,
+            )
+        return HighlightListViewHolder(binding)
     }
 
     override fun onBindViewHolder(holder: HighlightListViewHolder, position: Int) {
