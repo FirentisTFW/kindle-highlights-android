@@ -1,7 +1,7 @@
 package com.firentistfw.kindlehighlights
 
 import android.app.Application
-import com.firentistfw.kindlehighlights.di.viewModelModule
+import com.firentistfw.kindlehighlights.di.*
 import org.koin.android.ext.koin.androidContext
 import org.koin.core.context.GlobalContext.startKoin
 
@@ -15,7 +15,10 @@ class App : Application() {
         startKoin {
             androidContext(this@App)
             modules(
-                viewModelModule
+                dataSourceModule,
+                localStorageModule,
+                repositoryModule,
+                viewModelModule,
             )
         }
     }
