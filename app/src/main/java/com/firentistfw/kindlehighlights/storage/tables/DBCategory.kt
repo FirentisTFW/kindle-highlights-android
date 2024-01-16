@@ -6,7 +6,7 @@ import java.util.UUID
 
 @Entity("categories")
 data class DBCategory(
-    @PrimaryKey val id: UUID,
+    @PrimaryKey val categoryId: UUID,
     val date: String,
     val name: String,
 )

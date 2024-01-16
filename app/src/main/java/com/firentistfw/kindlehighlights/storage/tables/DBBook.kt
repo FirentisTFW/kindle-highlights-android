@@ -6,7 +6,7 @@ import java.util.UUID
 
 @Entity("books")
 data class DBBook(
-    @PrimaryKey val id: UUID,
+    @PrimaryKey val bookId: UUID,
     val author: String,
     val title: String,
 )

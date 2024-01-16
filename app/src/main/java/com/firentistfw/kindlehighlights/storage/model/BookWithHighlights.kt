@@ -8,8 +8,8 @@ import com.firentistfw.kindlehighlights.storage.tables.DBHighlight
 data class BookWithHighlights(
     @Embedded val book: DBBook,
     @Relation(
-        parentColumn = "id",
-        entityColumn = "bookId"
+        parentColumn = "bookId",
+        entityColumn = "bookId",
     )
-    val highlights: List<DBHighlight>
+    val highlights: List<DBHighlight>,
 )
