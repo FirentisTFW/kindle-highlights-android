@@ -5,7 +5,7 @@ import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
-import com.firentistfw.kindlehighlights.storage.model.DBHighlight
+import com.firentistfw.kindlehighlights.storage.tables.DBHighlight
 
 @Dao
 interface HighlightsDao {
