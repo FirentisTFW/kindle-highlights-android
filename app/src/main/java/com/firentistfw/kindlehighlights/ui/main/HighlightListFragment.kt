@@ -43,6 +43,9 @@ class HighlightListFragment : BaseFragment() {
                 }
 
                 is DataState.Success -> {
+                    // TODO Handle empty list case - display a button to import highlights
+                    //  or modify daily conditions
+
                     binding.rvHighlights.visibility = View.VISIBLE
                     binding.rvHighlights.layoutManager = LinearLayoutManager(context)
 
