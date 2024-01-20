@@ -5,8 +5,8 @@ import androidx.room.PrimaryKey
 import java.util.UUID
 
 enum class SelectionConditionType {
-    BOOK,
-    CATEGORY,
+    Book,
+    Category,
 }
 
 @Entity("selection-conditions")
