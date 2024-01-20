@@ -29,7 +29,7 @@ val localStorageModule = module {
 
 val repositoryModule = module {
     single { HighlightsRepository(get(), get()) }
-    single { SelectionConditionsRepository() }
+    single { SelectionConditionsRepository(get()) }
 }
 
 val viewModelModule = module {
