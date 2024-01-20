@@ -2,62 +2,42 @@ package com.firentistfw.kindlehighlights.data.repository
 
 import com.firentistfw.kindlehighlights.common.mocks.Mocks
 import com.firentistfw.kindlehighlights.models.Highlight
-import com.firentistfw.kindlehighlights.storage.dao.BooksDao
 import com.firentistfw.kindlehighlights.storage.dao.HighlightsDao
-import com.firentistfw.kindlehighlights.storage.tables.DBHighlight
+import com.firentistfw.kindlehighlights.storage.model.CompleteHighlight
+import com.firentistfw.kindlehighlights.storage.tables.SelectionCondition
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import java.util.UUID
 
-class HighlightsRepository(private val dao: HighlightsDao, private val booksDao: BooksDao) {
+class HighlightsRepository(
+    private val highlightsDao: HighlightsDao,
+    private val selectionConditionsRepository: SelectionConditionsRepository,
+) {
 
     private val repositoryScope = CoroutineScope(Dispatchers.Default)
 
-    fun allHighlights(): List<Highlight> {
-        return emptyList()
-
-//        return dao.getAll().map {
-//            Mapper.dbHighlightToHighlight(it)
-//        }
+    suspend fun getAllHighlights(): List<CompleteHighlight> = withContext(Dispatchers.IO) {
+        // FIXME What about mapping?
+        return@withContext highlightsDao.getAllComplete()
     }
 
-    suspend fun dailyHighlights(): List<Highlight> {
-        // FIXME Implement
-        // Get data from cached daily source. If it's empty, then get it from database and cache for this day.
+    suspend fun getDailyHighlights(): List<Highlight> {
+        // FIXME First get data from cached daily source.
 
         repositoryScope.launch {
 
-            dao.upsert(
-                DBHighlight(
-                    id = UUID.fromString("1f46d17d-9e3a-4842-9634-a7f9fd55400f"),
-                    bookId = UUID.fromString("1cc65b77-9964-4516-b769-82b182246756"),
-                    content = "Test",
-                    date = "Test",
-                    note = "Test",
-                ),
-            )
+            val bookConditions = selectionConditionsRepository.getBookConditions()
+            val categoryConditions = selectionConditionsRepository.getCategoryConditions()
 
+            val categoryHighlights = highlightsDao.getForCategories(bookConditions.ids())
+            val bookHighlights = highlightsDao.getForBooks(categoryConditions.ids())
+            // FIXME Take randomly 5 elements
+            val highlights = categoryHighlights + bookHighlights
 
-            dao.upsert(
-                DBHighlight(
-                    id = UUID.fromString("4f95451d-1bdb-4304-a168-0f2bf59f54d8"),
-                    bookId = UUID.fromString("1cc65b77-9964-4516-b769-82b182246756"),
-                    content = "Test2",
-                    date = "Test2",
-                    note = "Test2",
-                ),
-            )
-
-
-
-            val books = booksDao.getAllWithHighlights()
-
-            println(books)
         }
-
-
 
         delay(2000)
 
@@ -65,15 +45,8 @@ class HighlightsRepository(private val dao: HighlightsDao, private val booksDao:
     }
 }
 
-private object Mapper {
-//    fun dbHighlightToHighlight(highlight: DBHighlight): Highlight {
-//        return Highlight(
-//            book = highlight.book,
-//            categories = highlight.categories,
-//            content = highlight.content,
-//            date = highlight.date,
-//            id = highlight.id,
-//            note = highlight.note,
-//        )
-//    }
+private fun List<SelectionCondition>.ids(): List<UUID> {
+    return map {
+        it.id
+    }
 }

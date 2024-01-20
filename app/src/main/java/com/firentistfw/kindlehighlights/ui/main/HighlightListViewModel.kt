@@ -5,10 +5,8 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.firentistfw.kindlehighlights.common.BaseViewModel
 import com.firentistfw.kindlehighlights.common.DataState
-import com.firentistfw.kindlehighlights.common.mocks.Mocks
 import com.firentistfw.kindlehighlights.data.repository.HighlightsRepository
 import com.firentistfw.kindlehighlights.models.Highlight
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
 class HighlightListViewModel(
@@ -22,7 +20,7 @@ class HighlightListViewModel(
 
         viewModelScope.launch {
             try {
-                val result = repository.dailyHighlights()
+                val result = repository.getDailyHighlights()
                 _dataState.value = DataState.Success(result)
             } catch (e: Exception) {
                 _dataState.value = DataState.Error("Error fetching data: ${e.message}")
