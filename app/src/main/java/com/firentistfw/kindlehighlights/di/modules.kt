@@ -24,6 +24,7 @@ val localStorageModule = module {
     single { get<AppDatabase>().categoriesDao() }
     single { get<AppDatabase>().highlightsDao() }
     single { get<AppDatabase>().highlightCategoriesCrossRefDao() }
+    single { get<AppDatabase>().selectionConditionsDao() }
 }
 
 val repositoryModule = module {
