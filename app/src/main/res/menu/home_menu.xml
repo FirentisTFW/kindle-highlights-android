@@ -4,22 +4,22 @@
 
     <item
         android:id="@+id/miCategories"
-        android:title="Categories"
+        android:title="@string/homeMenu_item_categories"
         app:showAsAction="never" />
 
     <item
         android:id="@+id/miAddCategory"
-        android:title="Add category"
+        android:title="@string/homeMenu_item_addCategory"
         app:showAsAction="never" />
 
     <item
         android:id="@+id/miAllHighlights"
-        android:title="All highlights"
+        android:title="@string/homeMenu_item_allHighlights"
         app:showAsAction="never" />
 
     <item
         android:id="@+id/miImportHighlights"
-        android:title="Import Highlights"
+        android:title="@string/homeMenu_item_importHighlights"
         app:showAsAction="never" />
 
 </menu>
