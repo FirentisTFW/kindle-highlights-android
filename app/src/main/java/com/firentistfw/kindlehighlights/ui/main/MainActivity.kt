@@ -1,11 +1,13 @@
 package com.firentistfw.kindlehighlights.ui.main
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import com.firentistfw.kindlehighlights.R
 import com.firentistfw.kindlehighlights.common.BaseActivity
 import com.firentistfw.kindlehighlights.databinding.ActivityMainBinding
+import com.firentistfw.kindlehighlights.ui.addcategory.AddCategoryActivity
 import com.firentistfw.kindlehighlights.utils.ToastUtils
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -33,11 +35,17 @@ class MainActivity : BaseActivity() {
         when (item.itemId) {
             // TODO Implement navigation
             R.id.miCategories -> ToastUtils.showFeatureUnavailable(this)
-            R.id.miAddCategory -> ToastUtils.showFeatureUnavailable(this)
+            R.id.miAddCategory -> goToAddCategoryView()
             R.id.miAllHighlights -> ToastUtils.showFeatureUnavailable(this)
             R.id.miImportHighlights -> ToastUtils.showFeatureUnavailable(this)
         }
 
         return true
+    }
+
+    private fun goToAddCategoryView() {
+        Intent(this, AddCategoryActivity::class.java).also {
+            startActivity(it)
+        }
     }
 }

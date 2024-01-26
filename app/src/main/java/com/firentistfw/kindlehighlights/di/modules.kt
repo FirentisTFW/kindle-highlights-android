@@ -1,9 +1,11 @@
 package com.firentistfw.kindlehighlights.di
 
 import androidx.room.Room
+import com.firentistfw.kindlehighlights.data.repository.CategoriesRepository
 import com.firentistfw.kindlehighlights.data.repository.HighlightsRepository
 import com.firentistfw.kindlehighlights.data.repository.SelectionConditionsRepository
 import com.firentistfw.kindlehighlights.storage.AppDatabase
+import com.firentistfw.kindlehighlights.ui.addcategory.AddCategoryViewModel
 import com.firentistfw.kindlehighlights.ui.highlightdetails.HighlightDetailsViewModel
 import com.firentistfw.kindlehighlights.ui.main.HighlightListViewModel
 import com.firentistfw.kindlehighlights.ui.main.MainViewModel
@@ -28,11 +30,13 @@ val localStorageModule = module {
 }
 
 val repositoryModule = module {
+    single { CategoriesRepository(get()) }
     single { HighlightsRepository(get(), get()) }
     single { SelectionConditionsRepository(get()) }
 }
 
 val viewModelModule = module {
+    viewModel { AddCategoryViewModel(get()) }
     viewModel { HighlightDetailsViewModel() }
     viewModel { HighlightListViewModel(get()) }
     viewModel { MainViewModel() }

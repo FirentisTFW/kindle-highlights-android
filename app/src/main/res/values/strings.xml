@@ -5,10 +5,14 @@
     <string name="book">Book</string>
     <string name="date">Date</string>
     <string name="categories">Categories</string>
-    <string name="highlightDetailsUpdateCategoriesButton">UPDATE CATEGORIES</string>
+    <string name="highlightDetailsUpdateCategoriesButton">Update categories</string>
     <string name="toastUtils_featureNotAvailable">This feature is not available yet.</string>
+
     <string name="homeMenu_item_categories">Categories</string>
     <string name="homeMenu_item_addCategory">Add category</string>
     <string name="homeMenu_item_allHighlights">All highlights</string>
     <string name="homeMenu_item_importHighlights">Import highlights</string>
+
+    <string name="addCategory_categoryNameHint">Category name</string>
+    <string name="addCategory_addCategoryButton">Add category</string>
 </resources>

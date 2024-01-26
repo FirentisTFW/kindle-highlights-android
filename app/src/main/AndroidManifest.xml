@@ -4,18 +4,21 @@
     package="com.firentistfw.kindlehighlights">
 
     <application
+        android:name=".App"
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
         android:icon="@mipmap/ic_launcher"
-        android:name="com.firentistfw.kindlehighlights.App"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.KindleHighlights"
         tools:targetApi="31">
         <activity
-            android:name="com.firentistfw.kindlehighlights.ui.main.MainActivity"
+            android:name=".ui.addcategory.AddCategoryActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.main.MainActivity"
             android:exported="true"
             android:screenOrientation="portrait">
             <intent-filter>
@@ -24,11 +27,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
         <activity
-            android:name="com.firentistfw.kindlehighlights.ui.highlightdetails.HighlightDetailsActivity"
-            android:screenOrientation="portrait">
-        </activity>
+            android:name=".ui.highlightdetails.HighlightDetailsActivity"
+            android:screenOrientation="portrait"></activity>
     </application>
 
 </manifest>
