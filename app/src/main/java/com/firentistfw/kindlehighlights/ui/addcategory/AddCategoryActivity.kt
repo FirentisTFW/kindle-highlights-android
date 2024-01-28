@@ -19,11 +19,19 @@ class AddCategoryActivity : BaseActivity() {
     }
 
     override fun initInteractions() {
-         binding.btnAddCategory.setOnClickListener {
-             // FIXME Implement
-             ToastUtils.showFeatureUnavailable(this)
+        viewModel.requestState.observe(this) { state ->
+            // FIXME React to request states
 
-             viewModel.addCategory()
-         }
+            // FIXME Only display this on success
+            ToastUtils.showSimpleToast(this, "Category added successfully")
+        }
+
+        binding.btnAddCategory.setOnClickListener {
+            onButtonTap()
+        }
+    }
+
+    private fun onButtonTap() {
+        viewModel.addCategory(name = binding.etCategoryName.text.toString())
     }
 }

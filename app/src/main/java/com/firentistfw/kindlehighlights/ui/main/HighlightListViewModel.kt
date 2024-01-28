@@ -16,7 +16,7 @@ class HighlightListViewModel(
     val dataState: LiveData<DataState<List<Highlight>>> get() = _dataState
 
     fun fetchHighlights() {
-        _dataState.value = DataState.Loading(true)
+        _dataState.value = DataState.Loading()
 
         viewModelScope.launch {
             try {

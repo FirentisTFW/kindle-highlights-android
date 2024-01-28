@@ -9,7 +9,7 @@ object ToastUtils {
         showSimpleToast(context, context.getString(R.string.toastUtils_featureNotAvailable))
     }
 
-    private fun showSimpleToast(context: Context, text: String) {
+    fun showSimpleToast(context: Context, text: String) {
         Toast.makeText(context, text, Toast.LENGTH_SHORT).show()
     }
 }
