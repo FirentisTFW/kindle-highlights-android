@@ -14,7 +14,7 @@
         android:layout_height="wrap_content"
         android:background="@drawable/border"
         android:hint="@string/addCategory_categoryNameHint"
-        android:inputType="text"
+        android:inputType="textCapSentences"
         android:padding="10dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
