@@ -13,6 +13,8 @@ class RandomGeneratorActivity : BaseActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityRandomGeneratorBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        initInteractions()
     }
 
     override fun initInteractions() {

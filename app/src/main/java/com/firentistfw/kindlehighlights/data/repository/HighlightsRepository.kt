@@ -4,6 +4,7 @@ import com.firentistfw.kindlehighlights.common.mocks.Mocks
 import com.firentistfw.kindlehighlights.models.Highlight
 import com.firentistfw.kindlehighlights.storage.dao.HighlightsDao
 import com.firentistfw.kindlehighlights.storage.model.CompleteHighlight
+import com.firentistfw.kindlehighlights.storage.tables.DBHighlight
 import com.firentistfw.kindlehighlights.storage.tables.SelectionCondition
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -18,6 +19,10 @@ class HighlightsRepository(
 ) {
 
     private val repositoryScope = CoroutineScope(Dispatchers.Default)
+
+    suspend fun addHighlight(highlight: DBHighlight) = withContext(Dispatchers.IO) {
+        return@withContext highlightsDao.upsert(highlight)
+    }
 
     suspend fun getAllHighlights(): List<CompleteHighlight> = withContext(Dispatchers.IO) {
         // FIXME What about mapping?

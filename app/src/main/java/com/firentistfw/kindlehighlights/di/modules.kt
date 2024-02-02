@@ -1,6 +1,7 @@
 package com.firentistfw.kindlehighlights.di
 
 import androidx.room.Room
+import com.firentistfw.kindlehighlights.data.repository.BooksRepository
 import com.firentistfw.kindlehighlights.data.repository.CategoriesRepository
 import com.firentistfw.kindlehighlights.data.repository.HighlightsRepository
 import com.firentistfw.kindlehighlights.data.repository.SelectionConditionsRepository
@@ -30,6 +31,7 @@ val localStorageModule = module {
 }
 
 val repositoryModule = module {
+    single { BooksRepository(get()) }
     single { CategoriesRepository(get()) }
     single { HighlightsRepository(get(), get()) }
     single { SelectionConditionsRepository(get()) }
@@ -39,6 +41,6 @@ val viewModelModule = module {
     viewModel { AddCategoryViewModel(get()) }
     viewModel { HighlightDetailsViewModel() }
     viewModel { HighlightListViewModel(get()) }
-    viewModel { RandomGeneratorViewModel() }
+    viewModel { RandomGeneratorViewModel(get(), get()) }
 }
 
