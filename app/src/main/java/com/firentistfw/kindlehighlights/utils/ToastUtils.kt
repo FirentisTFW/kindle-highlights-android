@@ -5,6 +5,10 @@ import android.widget.Toast
 import com.firentistfw.kindlehighlights.R
 
 object ToastUtils {
+    fun showError(context: Context, error: String?) {
+        showSimpleToast(context, error ?: context.getString(R.string.toastUtils_genericError))
+    }
+
     fun showFeatureUnavailable(context: Context) {
         showSimpleToast(context, context.getString(R.string.toastUtils_featureNotAvailable))
     }

@@ -19,6 +19,8 @@ class AddCategoryViewModel(
     val requestState: LiveData<RequestState<Nothing>> get() = _requestState
 
     fun addCategory(name: String) {
+        // TODO Validate user input, make sure category name is unique
+
         _requestState.value = RequestState.Ongoing()
 
         val category = DBCategory(
@@ -29,12 +31,7 @@ class AddCategoryViewModel(
 
         viewModelScope.launch {
             try {
-                // FIXME Remove this test call
-                val categories = categoriesRepository.getCategories()
-                println(categories)
-
                 categoriesRepository.addCategory(category)
-
                 _requestState.value = RequestState.Success()
             } catch (e: Exception) {
                 _requestState.value = RequestState.Error(e.message)

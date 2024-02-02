@@ -7,6 +7,7 @@
     <string name="categories">Categories</string>
     <string name="highlightDetailsUpdateCategoriesButton">Update categories</string>
     <string name="toastUtils_featureNotAvailable">This feature is not available yet.</string>
+    <string name="toastUtils_genericError">Something went wrong. Please try again.</string>
 
     <string name="homeMenu_item_categories">Categories</string>
     <string name="homeMenu_item_addCategory">Add category</string>
@@ -15,4 +16,5 @@
 
     <string name="addCategory_categoryNameHint">Category name</string>
     <string name="addCategory_addCategoryButton">Add category</string>
+    <string name="addCategory_categoryAddedToast">Category added successfully</string>
 </resources>
