@@ -4,15 +4,15 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
+import com.firentistfw.kindlehighlights.BuildConfig
 import com.firentistfw.kindlehighlights.R
 import com.firentistfw.kindlehighlights.common.BaseActivity
 import com.firentistfw.kindlehighlights.databinding.ActivityMainBinding
 import com.firentistfw.kindlehighlights.ui.addcategory.AddCategoryActivity
+import com.firentistfw.kindlehighlights.ui.randomgenerator.RandomGeneratorActivity
 import com.firentistfw.kindlehighlights.utils.ToastUtils
-import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class MainActivity : BaseActivity() {
-    private val viewModel: MainViewModel by viewModel()
     private lateinit var binding: ActivityMainBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -26,7 +26,11 @@ class MainActivity : BaseActivity() {
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-        menuInflater.inflate(R.menu.home_menu, menu)
+        if (BuildConfig.DEBUG) {
+            menuInflater.inflate(R.menu.home_menu_debug, menu)
+        } else {
+            menuInflater.inflate(R.menu.home_menu, menu)
+        }
 
         return true
     }
@@ -38,6 +42,7 @@ class MainActivity : BaseActivity() {
             R.id.miAddCategory -> goToAddCategoryView()
             R.id.miAllHighlights -> ToastUtils.showFeatureUnavailable(this)
             R.id.miImportHighlights -> ToastUtils.showFeatureUnavailable(this)
+            R.id.miRandomGenerator -> goToRandomGeneratorView()
         }
 
         return true
@@ -45,6 +50,11 @@ class MainActivity : BaseActivity() {
 
     private fun goToAddCategoryView() {
         Intent(this, AddCategoryActivity::class.java).also {
+            startActivity(it)
+        }
+    }
+    private fun goToRandomGeneratorView() {
+        Intent(this, RandomGeneratorActivity::class.java).also {
             startActivity(it)
         }
     }

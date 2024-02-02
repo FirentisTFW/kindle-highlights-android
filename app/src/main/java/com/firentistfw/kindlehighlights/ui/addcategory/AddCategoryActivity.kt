@@ -21,6 +21,8 @@ class AddCategoryActivity : BaseActivity() {
     }
 
     override fun initInteractions() {
+        super.initInteractions()
+
         binding.btnAddCategory.setOnClickListener {
             onButtonTap()
         }

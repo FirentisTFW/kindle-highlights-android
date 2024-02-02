@@ -15,6 +15,9 @@
         android:theme="@style/Theme.KindleHighlights"
         tools:targetApi="31">
         <activity
+            android:name=".ui.randomgenerator.RandomGeneratorActivity"
+            android:exported="false" />
+        <activity
             android:name=".ui.addcategory.AddCategoryActivity"
             android:exported="false" />
         <activity
@@ -29,7 +32,7 @@
         </activity>
         <activity
             android:name=".ui.highlightdetails.HighlightDetailsActivity"
-            android:screenOrientation="portrait"></activity>
+            android:screenOrientation="portrait" />
     </application>
 
 </manifest>

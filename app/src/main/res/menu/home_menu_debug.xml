@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/miCategories"
+        android:title="@string/homeMenu_item_categories"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/miAddCategory"
+        android:title="@string/homeMenu_item_addCategory"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/miAllHighlights"
+        android:title="@string/homeMenu_item_allHighlights"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/miImportHighlights"
+        android:title="@string/homeMenu_item_importHighlights"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/miRandomGenerator"
+        android:title="@string/homeMenu_item_randomGenerator"
+        app:showAsAction="never" />
+
+</menu>

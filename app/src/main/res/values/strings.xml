@@ -13,8 +13,13 @@
     <string name="homeMenu_item_addCategory">Add category</string>
     <string name="homeMenu_item_allHighlights">All highlights</string>
     <string name="homeMenu_item_importHighlights">Import highlights</string>
+    <string name="homeMenu_item_randomGenerator">Generate random data</string>
 
     <string name="addCategory_categoryNameHint">Category name</string>
     <string name="addCategory_addCategoryButton">Add category</string>
     <string name="addCategory_categoryAddedToast">Category added successfully</string>
+
+    <string name="randomGenerator_addBookButton">Add random book</string>
+    <string name="randomGenerator_addHighlightButton">Add random highlight</string>
+
 </resources>
