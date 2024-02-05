@@ -7,6 +7,7 @@ import com.firentistfw.kindlehighlights.common.BaseActivity
 import com.firentistfw.kindlehighlights.common.Constants
 import com.firentistfw.kindlehighlights.databinding.ActivityHighlightDetailsBinding
 import com.firentistfw.kindlehighlights.models.authorAndTitleDisplay
+import com.firentistfw.kindlehighlights.utils.ToastUtils
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class HighlightDetailsActivity : BaseActivity() {
@@ -20,15 +21,26 @@ class HighlightDetailsActivity : BaseActivity() {
 
         binding.divider.background = ContextCompat.getDrawable(this, R.drawable.divider)
         fillInitialValues()
+
+        initInteractions()
     }
 
     private fun fillInitialValues() {
         val arguments = intent.getParcelableExtra<HighlightDetailsArguments>(Constants.argumentsKey)
         val highlight = arguments?.highlight
 
-        binding.quote.text = highlight?.content
-        binding.note.text = highlight?.note
-        binding.book.text = highlight?.book?.authorAndTitleDisplay
-        binding.date.text = highlight?.date
+        binding.tvQuote.text = highlight?.content
+        binding.tvNote.text = highlight?.note
+        binding.tvBook.text = highlight?.book?.authorAndTitleDisplay
+        binding.tvDate.text = highlight?.date
+    }
+
+    override fun initInteractions() {
+        super.initInteractions()
+
+        binding.btnUpdateCategories.setOnClickListener {
+            // FIXME Show bottom sheet with categories
+            ToastUtils.showFeatureUnavailable(this)
+        }
     }
 }
