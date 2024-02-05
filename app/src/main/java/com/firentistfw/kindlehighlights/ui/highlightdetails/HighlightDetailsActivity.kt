@@ -38,7 +38,7 @@ class HighlightDetailsActivity : BaseActivity() {
     override fun initInteractions() {
         super.initInteractions()
 
-        binding.btnUpdateCategories.setOnClickListener {
+        binding.btnManageCategories.setOnClickListener {
             // FIXME Show bottom sheet with categories
             ToastUtils.showFeatureUnavailable(this)
         }

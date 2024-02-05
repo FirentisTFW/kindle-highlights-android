@@ -139,7 +139,7 @@
     </LinearLayout>
 
     <com.google.android.material.button.MaterialButton
-        android:id="@+id/btnUpdateCategories"
+        android:id="@+id/btnManageCategories"
         style="@style/PrimaryButton"
-        android:text="@string/highlightDetailsUpdateCategoriesButton" />
+        android:text="@string/highlightDetails_manageCategoriesButton" />
 </LinearLayout>
