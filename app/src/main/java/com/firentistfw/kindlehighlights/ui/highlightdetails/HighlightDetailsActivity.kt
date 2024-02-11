@@ -6,13 +6,22 @@ import com.firentistfw.kindlehighlights.R
 import com.firentistfw.kindlehighlights.common.BaseActivity
 import com.firentistfw.kindlehighlights.common.Constants
 import com.firentistfw.kindlehighlights.databinding.ActivityHighlightDetailsBinding
+import com.firentistfw.kindlehighlights.models.Highlight
 import com.firentistfw.kindlehighlights.models.authorAndTitleDisplay
+import com.firentistfw.kindlehighlights.ui.managehighlightcategories.ManageHighlightCategoriesBottomSheetFragment
 import com.firentistfw.kindlehighlights.utils.ToastUtils
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class HighlightDetailsActivity : BaseActivity() {
     private val viewModel: HighlightDetailsViewModel by viewModel()
     private lateinit var binding: ActivityHighlightDetailsBinding
+
+    private val highlight: Highlight
+        get() {
+            // TODO Accept only highlightId in arguments and fetch the highlight from repository
+            val arguments = intent.getParcelableExtra<HighlightDetailsArguments>(Constants.argumentsKey)
+            return arguments!!.highlight
+        }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -26,13 +35,12 @@ class HighlightDetailsActivity : BaseActivity() {
     }
 
     private fun fillInitialValues() {
-        val arguments = intent.getParcelableExtra<HighlightDetailsArguments>(Constants.argumentsKey)
-        val highlight = arguments?.highlight
+        val highlight = highlight
 
-        binding.tvQuote.text = highlight?.content
-        binding.tvNote.text = highlight?.note
-        binding.tvBook.text = highlight?.book?.authorAndTitleDisplay
-        binding.tvDate.text = highlight?.date
+        binding.tvQuote.text = highlight.content
+        binding.tvNote.text = highlight.note
+        binding.tvBook.text = highlight.book.authorAndTitleDisplay
+        binding.tvDate.text = highlight.date
     }
 
     override fun initInteractions() {
@@ -41,6 +49,8 @@ class HighlightDetailsActivity : BaseActivity() {
         binding.btnManageCategories.setOnClickListener {
             // FIXME Show bottom sheet with categories
             ToastUtils.showFeatureUnavailable(this)
+            val categoriesBottomSheet = ManageHighlightCategoriesBottomSheetFragment(highlight.id)
+            categoriesBottomSheet.show(supportFragmentManager, categoriesBottomSheet.tag)
         }
     }
 }

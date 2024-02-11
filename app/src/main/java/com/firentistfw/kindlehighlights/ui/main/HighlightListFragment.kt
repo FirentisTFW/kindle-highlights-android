@@ -12,7 +12,6 @@ import com.firentistfw.kindlehighlights.ui.common.DividerItemDecoration
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class HighlightListFragment : BaseFragment() {
-
     override val layoutResId = R.layout.fragment_highlight_list
 
     private val viewModel: HighlightListViewModel by viewModel()
