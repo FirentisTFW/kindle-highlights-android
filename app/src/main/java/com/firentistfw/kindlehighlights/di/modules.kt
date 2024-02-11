@@ -9,6 +9,7 @@ import com.firentistfw.kindlehighlights.storage.AppDatabase
 import com.firentistfw.kindlehighlights.ui.addcategory.AddCategoryViewModel
 import com.firentistfw.kindlehighlights.ui.highlightdetails.HighlightDetailsViewModel
 import com.firentistfw.kindlehighlights.ui.main.HighlightListViewModel
+import com.firentistfw.kindlehighlights.ui.managehighlightcategories.ManageHighlightCategoriesViewModel
 import com.firentistfw.kindlehighlights.ui.randomgenerator.RandomGeneratorViewModel
 import org.koin.android.ext.koin.androidContext
 import org.koin.androidx.viewmodel.dsl.viewModel
@@ -41,6 +42,7 @@ val viewModelModule = module {
     viewModel { AddCategoryViewModel(get()) }
     viewModel { HighlightDetailsViewModel() }
     viewModel { HighlightListViewModel(get()) }
+    viewModel { ManageHighlightCategoriesViewModel(get()) }
     viewModel { RandomGeneratorViewModel(get(), get()) }
 }
 
