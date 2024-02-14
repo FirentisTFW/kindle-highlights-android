@@ -9,7 +9,6 @@ import com.firentistfw.kindlehighlights.databinding.ActivityHighlightDetailsBind
 import com.firentistfw.kindlehighlights.models.Highlight
 import com.firentistfw.kindlehighlights.models.authorAndTitleDisplay
 import com.firentistfw.kindlehighlights.ui.managehighlightcategories.ManageHighlightCategoriesBottomSheetFragment
-import com.firentistfw.kindlehighlights.utils.ToastUtils
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class HighlightDetailsActivity : BaseActivity() {
@@ -47,8 +46,6 @@ class HighlightDetailsActivity : BaseActivity() {
         super.initInteractions()
 
         binding.btnManageCategories.setOnClickListener {
-            // FIXME Show bottom sheet with categories
-            ToastUtils.showFeatureUnavailable(this)
             val categoriesBottomSheet = ManageHighlightCategoriesBottomSheetFragment(highlight.id)
             categoriesBottomSheet.show(supportFragmentManager, categoriesBottomSheet.tag)
         }
