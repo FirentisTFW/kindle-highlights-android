@@ -22,4 +22,7 @@
     <string name="randomGenerator_addBookButton">Add random book</string>
     <string name="randomGenerator_addHighlightButton">Add random highlight</string>
 
+    <string name="manageHighlightCategories_assignedCategories">Assigned categories</string>
+    <string name="manageHighlightCategories_otherCategories">Other categories</string>
+
 </resources>

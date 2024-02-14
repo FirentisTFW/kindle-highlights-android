@@ -14,7 +14,7 @@
         style="@style/HeadlineMediumText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Assigned categories" />
+        android:text="@string/manageHighlightCategories_assignedCategories" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvAssignedCategories"
@@ -28,7 +28,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
-        android:text="Other categories" />
+        android:text="@string/manageHighlightCategories_otherCategories" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvOtherCategories"
