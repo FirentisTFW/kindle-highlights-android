@@ -43,6 +43,6 @@ val viewModelModule = module {
     viewModel { HighlightDetailsViewModel() }
     viewModel { HighlightListViewModel(get()) }
     viewModel { ManageHighlightCategoriesViewModel(get()) }
-    viewModel { RandomGeneratorViewModel(get(), get()) }
+    viewModel { RandomGeneratorViewModel(get(), get(), get()) }
 }
 
