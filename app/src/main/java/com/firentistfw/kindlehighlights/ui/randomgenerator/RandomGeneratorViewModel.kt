@@ -3,8 +3,10 @@ package com.firentistfw.kindlehighlights.ui.randomgenerator
 import androidx.lifecycle.viewModelScope
 import com.firentistfw.kindlehighlights.common.BaseViewModel
 import com.firentistfw.kindlehighlights.data.repository.BooksRepository
+import com.firentistfw.kindlehighlights.data.repository.CategoriesRepository
 import com.firentistfw.kindlehighlights.data.repository.HighlightsRepository
 import com.firentistfw.kindlehighlights.storage.tables.DBBook
+import com.firentistfw.kindlehighlights.storage.tables.DBCategory
 import com.firentistfw.kindlehighlights.storage.tables.DBHighlight
 import kotlinx.coroutines.launch
 import java.util.Date
@@ -12,6 +14,7 @@ import java.util.UUID
 
 class RandomGeneratorViewModel(
     private val booksRepository: BooksRepository,
+    private val categoriesRepository: CategoriesRepository,
     private val highlightsRepository: HighlightsRepository,
 ) : BaseViewModel() {
     private val generator = Generator()
@@ -26,11 +29,18 @@ class RandomGeneratorViewModel(
 
     fun addRandomHighlight() {
         viewModelScope.launch {
-
             val book = booksRepository.getBooks().random()
             val highlight = generator.generateRandomHighlight(book.bookId)
 
             highlightsRepository.addHighlight(highlight)
+        }
+    }
+
+    fun addRandomCategory() {
+        val category = generator.generateRandomCategory()
+
+        viewModelScope.launch {
+            categoriesRepository.addCategory(category)
         }
     }
 }
@@ -57,7 +67,15 @@ private class Generator {
             bookId = bookId,
             highlightId = UUID.randomUUID(),
             content = content,
-            date = Date().toString()
+            date = Date().toString(),
+        )
+    }
+
+    fun generateRandomCategory(): DBCategory {
+        return DBCategory(
+            categoryId = UUID.randomUUID(),
+            date = Date().time,
+            name = words.random(),
         )
     }
 

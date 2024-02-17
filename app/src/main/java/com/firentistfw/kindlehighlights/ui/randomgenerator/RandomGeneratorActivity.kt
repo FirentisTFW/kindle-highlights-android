@@ -27,5 +27,9 @@ class RandomGeneratorActivity : BaseActivity() {
         binding.btnAddRandomHighlight.setOnClickListener {
             viewModel.addRandomHighlight()
         }
+
+        binding.btnAddRandomCategory.setOnClickListener {
+            viewModel.addRandomCategory()
+        }
     }
 }

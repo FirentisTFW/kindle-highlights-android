@@ -17,4 +17,8 @@
         style="@style/PrimaryButton"
         android:text="@string/randomGenerator_addHighlightButton" />
 
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btnAddRandomCategory"
+        style="@style/PrimaryButton"
+        android:text="@string/randomGenerator_addCategoryButton" />
 </LinearLayout>
