@@ -51,6 +51,19 @@ class ManageHighlightCategoriesBottomSheetFragment(
                 binding.rvAssignedCategories.addItemDecoration(dividerItemDecoration)
             }
         }
+        lifecycleScope.launchWhenStarted {
+            viewModel.otherCategories.collect { categories ->
+                binding.rvOtherCategories.layoutManager = LinearLayoutManager(context)
+
+                val adapter = CategoryListAdapter(categories)
+                binding.rvOtherCategories.adapter = adapter
+
+                val dividerItemDecoration =
+                    DividerItemDecoration(binding.rvOtherCategories.context)
+
+                binding.rvOtherCategories.addItemDecoration(dividerItemDecoration)
+            }
+        }
     }
 
     private fun fetchCategories() {

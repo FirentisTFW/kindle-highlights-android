@@ -16,7 +16,11 @@ class CategoriesRepository(private val categoriesDao: CategoriesDao) {
         return@withContext categoriesDao.getAll()
     }
 
-    fun getCategoriesFlowForHighlight(highlightId: UUID): Flow<List<DBCategory>> {
+    fun getAssignedCategoriesFlowForHighlight(highlightId: UUID): Flow<List<DBCategory>> {
         return categoriesDao.getFlowForHighlight(highlightId)
+    }
+
+    fun getPossibleCategoriesFlowForHighlight(highlightId: UUID): Flow<List<DBCategory>> {
+        return categoriesDao.getFlowNotForHighlight(highlightId)
     }
 }

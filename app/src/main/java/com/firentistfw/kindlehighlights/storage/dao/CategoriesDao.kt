@@ -23,4 +23,10 @@ interface CategoriesDao {
                 "WHERE crossRef.highlightId LIKE :highlightId"
     )
     fun getFlowForHighlight(highlightId: UUID): Flow<List<DBCategory>>
+
+    @Query("SELECT * FROM categories " +
+            "WHERE categories.categoryId NOT IN " +
+            "(SELECT categoryId FROM `highlight-category-cross-ref` " +
+            "WHERE highlightId = :highlightId)")
+    fun getFlowNotForHighlight(highlightId: UUID): Flow<List<DBCategory>>
 }
