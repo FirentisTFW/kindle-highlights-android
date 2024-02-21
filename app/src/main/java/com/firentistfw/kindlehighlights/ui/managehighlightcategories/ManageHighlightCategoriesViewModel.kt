@@ -27,12 +27,21 @@ class ManageHighlightCategoriesViewModel(
         }
 
         viewModelScope.launch {
-            val a = categoriesRepository.getCategories()
-
-            print(a)
             categoriesRepository.getPossibleCategoriesFlowForHighlight(highlightId).collect {
                 _otherCategories.value = it
             }
+        }
+    }
+
+    fun assignCategoryToHighlight(categoryId: UUID, highlightId: UUID) {
+        viewModelScope.launch {
+            categoriesRepository.assignCategoryToHighlight(categoryId, highlightId)
+        }
+    }
+
+    fun removeCategoryFromHighlight(categoryId: UUID, highlightId: UUID) {
+        viewModelScope.launch {
+            categoriesRepository.removeCategoryFromHighlight(categoryId, highlightId)
         }
     }
 }

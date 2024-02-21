@@ -33,7 +33,7 @@ val localStorageModule = module {
 
 val repositoryModule = module {
     single { BooksRepository(get()) }
-    single { CategoriesRepository(get()) }
+    single { CategoriesRepository(get(), get()) }
     single { HighlightsRepository(get(), get()) }
     single { SelectionConditionsRepository(get()) }
 }

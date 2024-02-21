@@ -42,7 +42,7 @@ class ManageHighlightCategoriesBottomSheetFragment(
             viewModel.assignedCategories.collect { categories ->
                 binding.rvAssignedCategories.layoutManager = LinearLayoutManager(context)
 
-                val adapter = CategoryListAdapter(categories)
+                val adapter = CategoryListAdapter(categories, onAssignedCategoryClickListener )
                 binding.rvAssignedCategories.adapter = adapter
 
                 val dividerItemDecoration =
@@ -55,7 +55,7 @@ class ManageHighlightCategoriesBottomSheetFragment(
             viewModel.otherCategories.collect { categories ->
                 binding.rvOtherCategories.layoutManager = LinearLayoutManager(context)
 
-                val adapter = CategoryListAdapter(categories)
+                val adapter = CategoryListAdapter(categories, onOtherCategoryClickListener)
                 binding.rvOtherCategories.adapter = adapter
 
                 val dividerItemDecoration =
@@ -65,6 +65,20 @@ class ManageHighlightCategoriesBottomSheetFragment(
             }
         }
     }
+
+    private val onAssignedCategoryClickListener = object : OnCategoryClickListener {
+        override fun onClick(categoryId: UUID) {
+            viewModel.removeCategoryFromHighlight(categoryId, highlightId)
+        }
+    }
+
+
+    private val onOtherCategoryClickListener = object : OnCategoryClickListener {
+        override fun onClick(categoryId: UUID) {
+            viewModel.assignCategoryToHighlight(categoryId, highlightId)
+        }
+    }
+
 
     private fun fetchCategories() {
         viewModel.fetchCategories(highlightId)

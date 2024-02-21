@@ -9,11 +9,11 @@ class CategoryListViewHolder (binding: ItemCategoryListCellBinding) :
     RecyclerView.ViewHolder(binding.root) {
     private val nameTextView: TextView = binding.tvName
 
-    fun bind(category: DBCategory) {
+    fun bind(category: DBCategory, itemClickListener: OnCategoryClickListener) {
         nameTextView.text = category.name
 
         itemView.setOnClickListener {
-            // FIXME Assign category to highlight (or what if it's already assigned to the highlight?)
+            itemClickListener.onClick(category.categoryId)
         }
     }
 }
