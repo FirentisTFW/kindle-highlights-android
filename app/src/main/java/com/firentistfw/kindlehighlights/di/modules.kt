@@ -8,6 +8,7 @@ import com.firentistfw.kindlehighlights.data.repository.SelectionConditionsRepos
 import com.firentistfw.kindlehighlights.storage.AppDatabase
 import com.firentistfw.kindlehighlights.ui.addcategory.AddCategoryViewModel
 import com.firentistfw.kindlehighlights.ui.highlightdetails.HighlightDetailsViewModel
+import com.firentistfw.kindlehighlights.ui.main.MainViewModel
 import com.firentistfw.kindlehighlights.ui.main.HighlightListViewModel
 import com.firentistfw.kindlehighlights.ui.managehighlightcategories.ManageHighlightCategoriesViewModel
 import com.firentistfw.kindlehighlights.ui.randomgenerator.RandomGeneratorViewModel
@@ -42,6 +43,7 @@ val viewModelModule = module {
     viewModel { AddCategoryViewModel(get()) }
     viewModel { HighlightDetailsViewModel(get()) }
     viewModel { HighlightListViewModel(get()) }
+    viewModel { MainViewModel() }
     viewModel { ManageHighlightCategoriesViewModel(get()) }
     viewModel { RandomGeneratorViewModel(get(), get(), get()) }
 }
