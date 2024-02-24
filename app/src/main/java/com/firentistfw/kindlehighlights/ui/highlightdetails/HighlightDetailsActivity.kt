@@ -2,6 +2,7 @@ package com.firentistfw.kindlehighlights.ui.highlightdetails
 
 import android.os.Bundle
 import androidx.core.content.ContextCompat
+import androidx.lifecycle.lifecycleScope
 import com.firentistfw.kindlehighlights.R
 import com.firentistfw.kindlehighlights.common.BaseActivity
 import com.firentistfw.kindlehighlights.common.Constants
@@ -18,7 +19,8 @@ class HighlightDetailsActivity : BaseActivity() {
     private val highlight: Highlight
         get() {
             // TODO Accept only highlightId in arguments and fetch the highlight from repository
-            val arguments = intent.getParcelableExtra<HighlightDetailsArguments>(Constants.argumentsKey)
+            val arguments =
+                intent.getParcelableExtra<HighlightDetailsArguments>(Constants.argumentsKey)
             return arguments!!.highlight
         }
 
@@ -31,6 +33,9 @@ class HighlightDetailsActivity : BaseActivity() {
         fillInitialValues()
 
         initInteractions()
+        initObservers()
+
+        viewModel.fetchHighlightCategories(highlight.id)
     }
 
     private fun fillInitialValues() {
@@ -48,6 +53,20 @@ class HighlightDetailsActivity : BaseActivity() {
         binding.btnManageCategories.setOnClickListener {
             val categoriesBottomSheet = ManageHighlightCategoriesBottomSheetFragment(highlight.id)
             categoriesBottomSheet.show(supportFragmentManager, categoriesBottomSheet.tag)
+        }
+    }
+
+    private fun initObservers() {
+        lifecycleScope.launchWhenStarted {
+            viewModel.assignedCategories.collect { categories ->
+                val categoriesText =
+                    if (categories.isEmpty()) getString(R.string.highlightDetails_noCategoriesAssigned)
+                    else categories.joinToString("\n") {
+                        "- ${it.name}"
+                    }
+
+                binding.tvAssignedCategories.text = categoriesText
+            }
         }
     }
 }

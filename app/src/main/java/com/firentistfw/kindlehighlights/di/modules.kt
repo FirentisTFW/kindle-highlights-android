@@ -40,7 +40,7 @@ val repositoryModule = module {
 
 val viewModelModule = module {
     viewModel { AddCategoryViewModel(get()) }
-    viewModel { HighlightDetailsViewModel() }
+    viewModel { HighlightDetailsViewModel(get()) }
     viewModel { HighlightListViewModel(get()) }
     viewModel { ManageHighlightCategoriesViewModel(get()) }
     viewModel { RandomGeneratorViewModel(get(), get(), get()) }

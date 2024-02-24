@@ -6,6 +6,7 @@
     <string name="date">Date</string>
     <string name="categories">Categories</string>
     <string name="highlightDetails_manageCategoriesButton">Manage categories</string>
+    <string name="highlightDetails_noCategoriesAssigned">No categories were assigned to this highlight yet</string>
     <string name="toastUtils_featureNotAvailable">This feature is not available yet.</string>
     <string name="toastUtils_genericError">Something went wrong. Please try again.</string>
 

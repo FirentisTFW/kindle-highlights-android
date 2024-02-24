@@ -137,6 +137,13 @@
 
     </LinearLayout>
 
+    <TextView
+        android:id="@+id/tvAssignedCategories"
+        style="@style/ContentText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp" />
+
     <com.google.android.material.button.MaterialButton
         android:id="@+id/btnManageCategories"
         style="@style/PrimaryButton"
