@@ -7,6 +7,14 @@ import com.firentistfw.kindlehighlights.extensions.substringUntil
 import com.firentistfw.kindlehighlights.models.*
 
 class KindleClippingsParser() {
+    fun createHighlightsFromRawClippingsInput(input: String): List<Highlight> {
+        val rawClippings = separateClippings(input)
+        val rawClippingsWithoutBookmarks = filterOutBookmarks(rawClippings)
+        val clippingBundles = combineClippingsIntoBundles(rawClippingsWithoutBookmarks)
+
+        return transformRawClippingsToModels(clippingBundles)
+    }
+
     fun separateClippings(clippingsText: String, separator: String = "=========="): List<String> =
         clippingsText.split(separator).map(String::trim).filterNotEmpty()
 
@@ -14,7 +22,7 @@ class KindleClippingsParser() {
         clippings.filter { !it.isBookmark }
 
     fun combineClippingsIntoBundles(clippings: List<String>): List<ClippingBundle> {
-        return clippings.fold(mutableListOf<ClippingBundle>()) { list, clipping ->
+        return clippings.fold(mutableListOf()) { list, clipping ->
             if (clipping.isNote)
                 list.updateLastElementNote(clipping)
             else

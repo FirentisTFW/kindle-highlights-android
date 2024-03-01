@@ -1,11 +1,13 @@
 package com.firentistfw.kindlehighlights.ui.main
 
 import android.Manifest
+import android.app.Activity
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.app.ActivityCompat
 import com.firentistfw.kindlehighlights.BuildConfig
 import com.firentistfw.kindlehighlights.R
@@ -22,6 +24,14 @@ class MainActivity : BaseActivity() {
 
     private val importHighlightsPermissionRequestCode = 0
     private val importHighlightsPermission = Manifest.permission.READ_EXTERNAL_STORAGE
+
+    private val pickTextFileLauncher =
+        registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+            if (result.resultCode == Activity.RESULT_OK) {
+                val data: Intent? = result.data
+                data?.data?.let(viewModel::importHighlightsFromFile)
+            }
+        }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -48,7 +58,7 @@ class MainActivity : BaseActivity() {
             R.id.miCategories -> ToastUtils.showFeatureUnavailable(this)
             R.id.miAddCategory -> goToAddCategoryView()
             R.id.miAllHighlights -> ToastUtils.showFeatureUnavailable(this)
-            R.id.miImportHighlights -> importHighlights()
+            R.id.miImportHighlights -> ensureStoragePermissionAndImportHighlights()
             R.id.miRandomGenerator -> goToRandomGeneratorView()
         }
 
@@ -68,18 +78,18 @@ class MainActivity : BaseActivity() {
         for (i in permissions.indices) {
             if (grantResults[i] == PackageManager.PERMISSION_GRANTED) {
                 when (permissions[i]) {
-                    importHighlightsPermission -> viewModel.importHighlights()
+                    importHighlightsPermission -> importHighlights()
                 }
             }
         }
     }
 
-    private fun importHighlights() {
+    private fun ensureStoragePermissionAndImportHighlights() {
         val storagePermissionStatus =
             ActivityCompat.checkSelfPermission(this, importHighlightsPermission)
 
         if (storagePermissionStatus == PackageManager.PERMISSION_GRANTED) {
-            viewModel.importHighlights()
+            importHighlights()
         } else {
             ActivityCompat.requestPermissions(
                 this, arrayOf(importHighlightsPermission), importHighlightsPermissionRequestCode
@@ -97,5 +107,13 @@ class MainActivity : BaseActivity() {
         Intent(this, RandomGeneratorActivity::class.java).also {
             startActivity(it)
         }
+    }
+
+    private fun importHighlights() {
+        val intent = Intent(Intent.ACTION_OPEN_DOCUMENT).apply {
+            addCategory(Intent.CATEGORY_OPENABLE)
+            type = "text/plain"
+        }
+        pickTextFileLauncher.launch(intent)
     }
 }
