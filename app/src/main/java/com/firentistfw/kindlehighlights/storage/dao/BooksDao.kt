@@ -13,6 +13,9 @@ interface BooksDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun upsert(book: DBBook)
 
+    @Insert(onConflict = OnConflictStrategy.IGNORE)
+    fun insertAll(books: List<DBBook>)
+
     @Query("SELECT * FROM books")
     fun getAll(): List<DBBook>
 

@@ -6,14 +6,14 @@ import androidx.lifecycle.viewModelScope
 import com.firentistfw.kindlehighlights.common.BaseViewModel
 import com.firentistfw.kindlehighlights.common.DataState
 import com.firentistfw.kindlehighlights.data.repository.HighlightsRepository
-import com.firentistfw.kindlehighlights.models.Highlight
+import com.firentistfw.kindlehighlights.storage.model.CompleteHighlight
 import kotlinx.coroutines.launch
 
 class HighlightListViewModel(
     private val repository: HighlightsRepository,
 ) : BaseViewModel() {
-    private val _dataState = MutableLiveData<DataState<List<Highlight>>>()
-    val dataState: LiveData<DataState<List<Highlight>>> get() = _dataState
+    private val _dataState = MutableLiveData<DataState<List<CompleteHighlight>>>()
+    val dataState: LiveData<DataState<List<CompleteHighlight>>> get() = _dataState
 
     fun fetchHighlights() {
         _dataState.value = DataState.Loading()

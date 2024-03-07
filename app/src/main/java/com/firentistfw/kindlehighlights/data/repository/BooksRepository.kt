@@ -10,6 +10,10 @@ class BooksRepository(private val booksDao: BooksDao) {
         return@withContext booksDao.upsert(book)
     }
 
+    suspend fun addBooks(books: List<DBBook>) = withContext(Dispatchers.IO) {
+        return@withContext booksDao.insertAll(books)
+    }
+
     suspend fun getBooks(): List<DBBook> = withContext(Dispatchers.IO) {
         return@withContext booksDao.getAll()
     }

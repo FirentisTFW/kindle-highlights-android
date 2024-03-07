@@ -4,9 +4,9 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.firentistfw.kindlehighlights.databinding.ItemHighlightListCellBinding
-import com.firentistfw.kindlehighlights.models.Highlight
+import com.firentistfw.kindlehighlights.storage.model.CompleteHighlight
 
-class HighlightListAdapter(private val highlights: List<Highlight>) :
+class HighlightListAdapter(private val highlights: List<CompleteHighlight>) :
     RecyclerView.Adapter<HighlightListViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): HighlightListViewHolder {
         val binding =
@@ -19,7 +19,7 @@ class HighlightListAdapter(private val highlights: List<Highlight>) :
     }
 
     override fun onBindViewHolder(holder: HighlightListViewHolder, position: Int) {
-        val data: Highlight = highlights[position]
+        val data: CompleteHighlight = highlights[position]
         holder.bind(data)
     }
 

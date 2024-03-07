@@ -15,6 +15,9 @@ interface HighlightsDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun upsert(highlight: DBHighlight)
 
+    @Insert(onConflict = OnConflictStrategy.IGNORE)
+    suspend fun insertAll(highlights: List<DBHighlight>)
+
     @Query("SELECT * FROM highlights")
     suspend fun getAll(): List<DBHighlight>
 

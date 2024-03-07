@@ -1,12 +1,10 @@
 package com.firentistfw.kindlehighlights.utils
 
-
-import com.firentistfw.kindlehighlights.models.Book
+import com.firentistfw.kindlehighlights.models.ImportedBook
 import com.firentistfw.kindlehighlights.models.ClippingBundle
-import com.firentistfw.kindlehighlights.models.Highlight
+import com.firentistfw.kindlehighlights.models.ImportedHighlight
 import com.google.common.truth.Truth.assertThat
 import org.junit.Test
-import java.util.*
 
 class KindleClippingsParserTest {
     private val exampleBookmarkRaw = "Book Title (Author Name)\n" +
@@ -63,12 +61,12 @@ class KindleClippingsParserTest {
         exampleClippingBundleWithoutNote,
     )
 
-    private val exampleBook = Book(
+    private val exampleBook = ImportedBook(
         author = "Author Name",
         title = "Book Title",
     )
 
-    private val exampleHighlight = Highlight(
+    private val exampleHighlight = ImportedHighlight(
         book = exampleBook,
         categories = emptyList(),
         content = "Text in the book - oooo.",
@@ -76,8 +74,7 @@ class KindleClippingsParserTest {
         note = "My note on the text in the book",
     )
 
-
-    private val exampleHighlight2 = Highlight(
+    private val exampleHighlight2 = ImportedHighlight(
         book = exampleBook,
         categories = emptyList(),
         content = "Another text in the book - oooo.",
@@ -118,19 +115,6 @@ class KindleClippingsParserTest {
         val sut = KindleClippingsParser()
         val result = sut.transformRawClippingsToModels(exampleClippingBundles)
 
-        assertThat(result.normalizeIdsForTests()).isEqualTo(exampleHighlights.normalizeIdsForTests())
+        assertThat(result).isEqualTo(exampleHighlights)
     }
 }
-
-private fun List<Highlight>.normalizeIdsForTests(): List<Highlight> =
-    map {
-        it.copy(
-            book = it.book.copy(
-                id = UUID.fromString("1fc03087-d265-11e7-b8c6-83e29cd24f4c"),
-            ),
-            id = UUID.fromString("2fc03087-d265-11e7-b8c6-83e29cd24f4c")
-        )
-    }
-
-
-

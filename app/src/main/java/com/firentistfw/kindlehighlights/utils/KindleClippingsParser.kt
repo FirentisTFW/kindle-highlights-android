@@ -7,7 +7,7 @@ import com.firentistfw.kindlehighlights.extensions.substringUntil
 import com.firentistfw.kindlehighlights.models.*
 
 class KindleClippingsParser() {
-    fun createHighlightsFromRawClippingsInput(input: String): List<Highlight> {
+    fun createHighlightsFromRawClippingsInput(input: String): List<ImportedHighlight> {
         val rawClippings = separateClippings(input)
         val rawClippingsWithoutBookmarks = filterOutBookmarks(rawClippings)
         val clippingBundles = combineClippingsIntoBundles(rawClippingsWithoutBookmarks)
@@ -30,7 +30,7 @@ class KindleClippingsParser() {
         }
     }
 
-    fun transformRawClippingsToModels(clippingBundles: List<ClippingBundle>): List<Highlight> {
+    fun transformRawClippingsToModels(clippingBundles: List<ClippingBundle>): List<ImportedHighlight> {
         return clippingBundles.map {
             val clippingParts = it.highlightRaw.split("\n").filterNotEmpty()
             val note = it.noteRaw?.split("\n")?.filterNotEmpty()?.last()
@@ -39,8 +39,8 @@ class KindleClippingsParser() {
             val author = bookTitleAndAuthor.substringFrom("(").removeParenthesis()
             val content = clippingParts.last()
             val date = clippingParts[1].substringFrom(",", shouldIncludeStart = false).trim()
-            Highlight(
-                book = Book(
+            ImportedHighlight(
+                book = ImportedBook(
                     author = author,
                     title = title,
                 ),
