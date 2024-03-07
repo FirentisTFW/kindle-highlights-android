@@ -1,4 +1,4 @@
-package com.firentistfw.kindlehighlights.ui.main
+package com.firentistfw.kindlehighlights.ui.highlightlist
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData

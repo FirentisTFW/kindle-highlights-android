@@ -16,6 +16,7 @@ import com.firentistfw.kindlehighlights.common.BaseActivity
 import com.firentistfw.kindlehighlights.common.RequestState
 import com.firentistfw.kindlehighlights.databinding.ActivityMainBinding
 import com.firentistfw.kindlehighlights.ui.addcategory.AddCategoryActivity
+import com.firentistfw.kindlehighlights.ui.highlightlist.HighlightListFragment
 import com.firentistfw.kindlehighlights.ui.randomgenerator.RandomGeneratorActivity
 import com.firentistfw.kindlehighlights.utils.ToastUtils
 import org.koin.androidx.viewmodel.ext.android.viewModel
