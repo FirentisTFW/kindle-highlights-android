@@ -7,11 +7,13 @@ import android.content.pm.PackageManager
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
+import android.view.View
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.app.ActivityCompat
 import com.firentistfw.kindlehighlights.BuildConfig
 import com.firentistfw.kindlehighlights.R
 import com.firentistfw.kindlehighlights.common.BaseActivity
+import com.firentistfw.kindlehighlights.common.RequestState
 import com.firentistfw.kindlehighlights.databinding.ActivityMainBinding
 import com.firentistfw.kindlehighlights.ui.addcategory.AddCategoryActivity
 import com.firentistfw.kindlehighlights.ui.randomgenerator.RandomGeneratorActivity
@@ -38,7 +40,9 @@ class MainActivity : BaseActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        supportFragmentManager.beginTransaction().replace(R.id.fragment, HighlightListFragment())
+        initObservers()
+
+        supportFragmentManager.beginTransaction().replace(R.id.fragmentHighlightList, HighlightListFragment())
             .commit()
     }
 
@@ -79,6 +83,32 @@ class MainActivity : BaseActivity() {
             if (grantResults[i] == PackageManager.PERMISSION_GRANTED) {
                 when (permissions[i]) {
                     importHighlightsPermission -> importHighlights()
+                }
+            }
+        }
+    }
+
+    private fun initObservers() {
+        viewModel.fileImportRequestState.observe(this) { state ->
+            binding.pbImportHighlights.visibility = View.GONE
+            binding.fragmentHighlightList.visibility = View.GONE
+
+            when (state) {
+                is RequestState.Error -> {
+                    ToastUtils.showError(this, state.error)
+                    binding.fragmentHighlightList.visibility = View.VISIBLE
+                }
+
+                is RequestState.Ongoing -> {
+                    binding.pbImportHighlights.visibility = View.VISIBLE
+                }
+
+                is RequestState.Success -> {
+                    binding.fragmentHighlightList.visibility = View.VISIBLE
+                    ToastUtils.showSimpleToast(
+                        this,
+                        getString(R.string.main_highlightsImportedToast)
+                    )
                 }
             }
         }

@@ -27,4 +27,6 @@
     <string name="manageHighlightCategories_assignedCategories">Assigned categories</string>
     <string name="manageHighlightCategories_otherCategories">Other categories</string>
 
+    <string name="main_highlightsImportedToast">Highlights successfully imported</string>
+
 </resources>

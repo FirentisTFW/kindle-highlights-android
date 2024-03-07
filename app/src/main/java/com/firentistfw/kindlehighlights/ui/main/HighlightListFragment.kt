@@ -28,7 +28,7 @@ class HighlightListFragment : BaseFragment() {
 
     private fun initObservers() {
         viewModel.dataState.observe(viewLifecycleOwner) { state ->
-            binding.circularProgressBar.visibility = View.GONE
+            binding.pbHighlightList.visibility = View.GONE
             binding.rvHighlights.visibility = View.GONE
 
             when (state) {
@@ -38,7 +38,7 @@ class HighlightListFragment : BaseFragment() {
                 }
 
                 is DataState.Loading -> {
-                    binding.circularProgressBar.visibility = View.VISIBLE
+                    binding.pbHighlightList.visibility = View.VISIBLE
                 }
 
                 is DataState.Success -> {
