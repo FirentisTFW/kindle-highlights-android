@@ -23,7 +23,6 @@ class MainViewModel(
     private val clippingsParser: KindleClippingsParser,
 ) : BaseViewModel() {
     private val _fileImportRequestState = MutableLiveData<RequestState<Nothing>>()
-    // FIXME Listen for result in activity
     val fileImportRequestState: LiveData<RequestState<Nothing>> get() = _fileImportRequestState
 
     fun importHighlightsFromFile(uri: Uri) {
@@ -35,7 +34,6 @@ class MainViewModel(
                 val importedHighlights =
                     clippingsParser.createHighlightsFromRawClippingsInput(content)
 
-                // Map highlights into books (set) and insert books first, then replace higlight's book with book_id?
                 val books = importedHighlights.map(ImportedHighlight::book).toSet().map {
                     DBBook(
                         bookId = UUID.randomUUID(),
@@ -51,8 +49,6 @@ class MainViewModel(
                     }
                     importedHighlight.mapToHighlight(book.bookId)
                 }
-
-                print(books)
 
                 booksRepository.addBooks(books)
                 highlightsRepository.addHighlights(highlights)
