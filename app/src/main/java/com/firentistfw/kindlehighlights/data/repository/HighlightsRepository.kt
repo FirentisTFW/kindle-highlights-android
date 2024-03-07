@@ -28,7 +28,6 @@ class HighlightsRepository(
     }
 
     suspend fun getAllHighlights(): List<CompleteHighlight> = withContext(Dispatchers.IO) {
-        // FIXME What about mapping?
         return@withContext highlightsDao.getAllComplete()
     }
 

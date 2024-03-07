@@ -1,4 +1,4 @@
-package com.firentistfw.kindlehighlights.ui.highlightlist
+package com.firentistfw.kindlehighlights.ui.common.highlightlist
 
 import android.os.Bundle
 import android.util.Log
@@ -11,7 +11,9 @@ import com.firentistfw.kindlehighlights.databinding.FragmentHighlightListBinding
 import com.firentistfw.kindlehighlights.ui.common.DividerItemDecoration
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class HighlightListFragment : BaseFragment() {
+class HighlightListFragment(
+    private val listType: HighlightListType,
+) : BaseFragment() {
     override val layoutResId = R.layout.fragment_highlight_list
 
     private val viewModel: HighlightListViewModel by viewModel()
@@ -60,6 +62,6 @@ class HighlightListFragment : BaseFragment() {
     }
 
     private fun fetchHighlights() {
-        viewModel.fetchHighlights()
+        viewModel.fetchHighlights(listType)
     }
 }

@@ -1,4 +1,4 @@
-package com.firentistfw.kindlehighlights.ui.highlightlist
+package com.firentistfw.kindlehighlights.ui.common.highlightlist
 
 import android.view.LayoutInflater
 import android.view.ViewGroup

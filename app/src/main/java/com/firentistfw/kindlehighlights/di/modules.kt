@@ -10,7 +10,7 @@ import com.firentistfw.kindlehighlights.storage.AppDatabase
 import com.firentistfw.kindlehighlights.ui.addcategory.AddCategoryViewModel
 import com.firentistfw.kindlehighlights.ui.highlightdetails.HighlightDetailsViewModel
 import com.firentistfw.kindlehighlights.ui.main.MainViewModel
-import com.firentistfw.kindlehighlights.ui.highlightlist.HighlightListViewModel
+import com.firentistfw.kindlehighlights.ui.common.highlightlist.HighlightListViewModel
 import com.firentistfw.kindlehighlights.ui.managehighlightcategories.ManageHighlightCategoriesViewModel
 import com.firentistfw.kindlehighlights.ui.randomgenerator.RandomGeneratorViewModel
 import com.firentistfw.kindlehighlights.utils.KindleClippingsParser

@@ -1,4 +1,4 @@
-package com.firentistfw.kindlehighlights.ui.highlightlist
+package com.firentistfw.kindlehighlights.ui.common.highlightlist
 
 import android.content.Intent
 import android.widget.TextView

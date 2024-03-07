@@ -16,7 +16,8 @@ import com.firentistfw.kindlehighlights.common.BaseActivity
 import com.firentistfw.kindlehighlights.common.RequestState
 import com.firentistfw.kindlehighlights.databinding.ActivityMainBinding
 import com.firentistfw.kindlehighlights.ui.addcategory.AddCategoryActivity
-import com.firentistfw.kindlehighlights.ui.highlightlist.HighlightListFragment
+import com.firentistfw.kindlehighlights.ui.common.highlightlist.HighlightListFragment
+import com.firentistfw.kindlehighlights.ui.common.highlightlist.HighlightListType
 import com.firentistfw.kindlehighlights.ui.randomgenerator.RandomGeneratorActivity
 import com.firentistfw.kindlehighlights.utils.ToastUtils
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -43,7 +44,8 @@ class MainActivity : BaseActivity() {
 
         initObservers()
 
-        supportFragmentManager.beginTransaction().replace(R.id.fragmentHighlightList, HighlightListFragment())
+        supportFragmentManager.beginTransaction()
+            .replace(R.id.fragmentHighlightList, HighlightListFragment(HighlightListType.Daily))
             .commit()
     }
 
