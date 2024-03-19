@@ -42,7 +42,7 @@ class ManageHighlightCategoriesBottomSheetFragment(
             viewModel.assignedCategories.collect { categories ->
                 binding.rvAssignedCategories.layoutManager = LinearLayoutManager(context)
 
-                val adapter = CategoryListAdapter(categories, onAssignedCategoryClickListener )
+                val adapter = CategoryListAdapter(categories, onAssignedCategoryClickListener)
                 binding.rvAssignedCategories.adapter = adapter
 
                 val dividerItemDecoration =
@@ -72,13 +72,11 @@ class ManageHighlightCategoriesBottomSheetFragment(
         }
     }
 
-
     private val onOtherCategoryClickListener = object : OnCategoryClickListener {
         override fun onClick(categoryId: UUID) {
             viewModel.assignCategoryToHighlight(categoryId, highlightId)
         }
     }
-
 
     private fun fetchCategories() {
         viewModel.fetchCategories(highlightId)

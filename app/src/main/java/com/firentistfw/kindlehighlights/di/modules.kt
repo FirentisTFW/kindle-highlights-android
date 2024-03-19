@@ -8,6 +8,7 @@ import com.firentistfw.kindlehighlights.data.repository.LocalFilesRepository
 import com.firentistfw.kindlehighlights.data.repository.SelectionConditionsRepository
 import com.firentistfw.kindlehighlights.storage.AppDatabase
 import com.firentistfw.kindlehighlights.ui.addcategory.AddCategoryViewModel
+import com.firentistfw.kindlehighlights.ui.categorylist.CategoryListViewModel
 import com.firentistfw.kindlehighlights.ui.highlightdetails.HighlightDetailsViewModel
 import com.firentistfw.kindlehighlights.ui.main.MainViewModel
 import com.firentistfw.kindlehighlights.ui.common.highlightlist.HighlightListViewModel
@@ -52,6 +53,7 @@ val servicesModule = module {
 
 val viewModelModule = module {
     viewModel { AddCategoryViewModel(get()) }
+    viewModel { CategoryListViewModel(get()) }
     viewModel { HighlightDetailsViewModel(get()) }
     viewModel { HighlightListViewModel(get()) }
     viewModel { MainViewModel(get(), get(), get(), get()) }

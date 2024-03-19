@@ -16,6 +16,7 @@ import com.firentistfw.kindlehighlights.common.BaseActivity
 import com.firentistfw.kindlehighlights.common.RequestState
 import com.firentistfw.kindlehighlights.databinding.ActivityMainBinding
 import com.firentistfw.kindlehighlights.ui.addcategory.AddCategoryActivity
+import com.firentistfw.kindlehighlights.ui.categorylist.CategoryListActivity
 import com.firentistfw.kindlehighlights.ui.common.highlightlist.HighlightListFragment
 import com.firentistfw.kindlehighlights.ui.common.highlightlist.HighlightListType
 import com.firentistfw.kindlehighlights.ui.highlightlist.HighlightListActivity
@@ -62,8 +63,7 @@ class MainActivity : BaseActivity() {
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
-            // TODO Implement navigation
-            R.id.miCategories -> ToastUtils.showFeatureUnavailable(this)
+            R.id.miCategories -> goToCategoryListView()
             R.id.miAddCategory -> goToAddCategoryView()
             R.id.miAllHighlights -> goToHighlightListView()
             R.id.miImportHighlights -> ensureStoragePermissionAndImportHighlights()
@@ -133,6 +133,12 @@ class MainActivity : BaseActivity() {
 
     private fun goToAddCategoryView() {
         Intent(this, AddCategoryActivity::class.java).also {
+            startActivity(it)
+        }
+    }
+
+    private fun goToCategoryListView() {
+        Intent(this, CategoryListActivity::class.java).also {
             startActivity(it)
         }
     }

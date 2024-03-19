@@ -11,7 +11,6 @@ interface OnCategoryClickListener {
     fun onClick(categoryId: UUID)
 }
 
-
 class CategoryListAdapter(
     private val categories: List<DBCategory>,
     private val itemClickListener: OnCategoryClickListener,

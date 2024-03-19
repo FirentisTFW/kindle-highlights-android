@@ -30,7 +30,7 @@ class HighlightListFragment(
 
     private fun initObservers() {
         viewModel.dataState.observe(viewLifecycleOwner) { state ->
-            binding.pbHighlightList.visibility = View.GONE
+            binding.pbHighlights.visibility = View.GONE
             binding.rvHighlights.visibility = View.GONE
 
             when (state) {
@@ -40,7 +40,7 @@ class HighlightListFragment(
                 }
 
                 is DataState.Loading -> {
-                    binding.pbHighlightList.visibility = View.VISIBLE
+                    binding.pbHighlights.visibility = View.VISIBLE
                 }
 
                 is DataState.Success -> {
