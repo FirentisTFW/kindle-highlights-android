@@ -18,6 +18,7 @@ import com.firentistfw.kindlehighlights.databinding.ActivityMainBinding
 import com.firentistfw.kindlehighlights.ui.addcategory.AddCategoryActivity
 import com.firentistfw.kindlehighlights.ui.common.highlightlist.HighlightListFragment
 import com.firentistfw.kindlehighlights.ui.common.highlightlist.HighlightListType
+import com.firentistfw.kindlehighlights.ui.highlightlist.HighlightListActivity
 import com.firentistfw.kindlehighlights.ui.randomgenerator.RandomGeneratorActivity
 import com.firentistfw.kindlehighlights.utils.ToastUtils
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -64,7 +65,7 @@ class MainActivity : BaseActivity() {
             // TODO Implement navigation
             R.id.miCategories -> ToastUtils.showFeatureUnavailable(this)
             R.id.miAddCategory -> goToAddCategoryView()
-            R.id.miAllHighlights -> ToastUtils.showFeatureUnavailable(this)
+            R.id.miAllHighlights -> goToHighlightListView()
             R.id.miImportHighlights -> ensureStoragePermissionAndImportHighlights()
             R.id.miRandomGenerator -> goToRandomGeneratorView()
         }
@@ -132,6 +133,12 @@ class MainActivity : BaseActivity() {
 
     private fun goToAddCategoryView() {
         Intent(this, AddCategoryActivity::class.java).also {
+            startActivity(it)
+        }
+    }
+
+    private fun goToHighlightListView() {
+        Intent(this, HighlightListActivity::class.java).also {
             startActivity(it)
         }
     }
