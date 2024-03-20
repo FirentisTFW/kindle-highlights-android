@@ -12,8 +12,9 @@
 
     <string name="homeMenu_item_categories">Categories</string>
     <string name="homeMenu_item_addCategory">Add category</string>
-    <string name="homeMenu_item_allHighlights">All highlights</string>
+    <string name="homeMenu_item_allHighlights">Highlights</string>
     <string name="homeMenu_item_importHighlights">Import highlights</string>
+    <string name="homeMenu_item_selections">Selections</string>
     <string name="homeMenu_item_randomGenerator">Generate random data</string>
 
     <string name="addCategory_categoryNameHint">Category name</string>
@@ -26,6 +27,11 @@
 
     <string name="manageHighlightCategories_assignedCategories">Assigned categories</string>
     <string name="manageHighlightCategories_otherCategories">Other categories</string>
+
+    <string name="selections_books">Selected Books</string>
+    <string name="selections_manageBooksButton">Manage books</string>
+    <string name="selections_categories">Selected categories</string>
+    <string name="selections_manageCategoriesButton">Manage categories</string>
 
     <string name="main_highlightsImportedToast">Highlights successfully imported</string>
 

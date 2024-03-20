@@ -5,7 +5,7 @@ import com.firentistfw.kindlehighlights.data.repository.BooksRepository
 import com.firentistfw.kindlehighlights.data.repository.CategoriesRepository
 import com.firentistfw.kindlehighlights.data.repository.HighlightsRepository
 import com.firentistfw.kindlehighlights.data.repository.LocalFilesRepository
-import com.firentistfw.kindlehighlights.data.repository.SelectionConditionsRepository
+import com.firentistfw.kindlehighlights.data.repository.SelectionsRepository
 import com.firentistfw.kindlehighlights.storage.AppDatabase
 import com.firentistfw.kindlehighlights.ui.addcategory.AddCategoryViewModel
 import com.firentistfw.kindlehighlights.ui.categorylist.CategoryListViewModel
@@ -14,6 +14,7 @@ import com.firentistfw.kindlehighlights.ui.main.MainViewModel
 import com.firentistfw.kindlehighlights.ui.common.highlightlist.HighlightListViewModel
 import com.firentistfw.kindlehighlights.ui.managehighlightcategories.ManageHighlightCategoriesViewModel
 import com.firentistfw.kindlehighlights.ui.randomgenerator.RandomGeneratorViewModel
+import com.firentistfw.kindlehighlights.ui.selections.SelectionsViewModel
 import com.firentistfw.kindlehighlights.utils.KindleClippingsParser
 import org.koin.android.ext.koin.androidContext
 import org.koin.androidx.viewmodel.dsl.viewModel
@@ -44,7 +45,7 @@ val repositoryModule = module {
     single { CategoriesRepository(get(), get()) }
     single { HighlightsRepository(get(), get()) }
     single { LocalFilesRepository(get()) }
-    single { SelectionConditionsRepository(get()) }
+    single { SelectionsRepository(get()) }
 }
 
 val servicesModule = module {
@@ -59,5 +60,6 @@ val viewModelModule = module {
     viewModel { MainViewModel(get(), get(), get(), get()) }
     viewModel { ManageHighlightCategoriesViewModel(get()) }
     viewModel { RandomGeneratorViewModel(get(), get(), get()) }
+    viewModel { SelectionsViewModel(get()) }
 }
 

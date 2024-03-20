@@ -13,8 +13,13 @@
         app:showAsAction="never" />
 
     <item
-        android:id="@+id/miAllHighlights"
+        android:id="@+id/miHighlights"
         android:title="@string/homeMenu_item_allHighlights"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/miSelections"
+        android:title="@string/homeMenu_item_selections"
         app:showAsAction="never" />
 
     <item

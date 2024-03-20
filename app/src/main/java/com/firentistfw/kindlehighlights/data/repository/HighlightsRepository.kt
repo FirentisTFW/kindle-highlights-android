@@ -14,7 +14,7 @@ import java.util.UUID
 
 class HighlightsRepository(
     private val highlightsDao: HighlightsDao,
-    private val selectionConditionsRepository: SelectionConditionsRepository,
+    private val selectionsRepository: SelectionsRepository,
 ) {
 
     private val repositoryScope = CoroutineScope(Dispatchers.Default)
@@ -36,8 +36,8 @@ class HighlightsRepository(
 
         repositoryScope.launch {
 
-            val bookConditions = selectionConditionsRepository.getBookConditions()
-            val categoryConditions = selectionConditionsRepository.getCategoryConditions()
+            val bookConditions = selectionsRepository.getBookConditions()
+            val categoryConditions = selectionsRepository.getCategoryConditions()
 
             val categoryHighlights = highlightsDao.getForCategories(bookConditions.ids())
             val bookHighlights = highlightsDao.getForBooks(categoryConditions.ids())

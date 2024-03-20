@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="20dp"
+    tools:context=".ui.selections.SelectionsActivity">
+
+    <TextView
+        style="@style/HeadlineMediumText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/selections_books" />
+
+    <TextView
+        android:id="@+id/tvChosenBooks"
+        style="@style/ContentText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btnManageBooks"
+        style="@style/PrimaryButton"
+        android:text="@string/selections_manageBooksButton" />
+
+    <TextView
+        style="@style/HeadlineMediumText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="@string/selections_categories" />
+
+    <TextView
+        android:id="@+id/tvChosenCategories"
+        style="@style/ContentText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btnManageCategories"
+        style="@style/PrimaryButton"
+        android:text="@string/selections_manageCategoriesButton" />
+
+</LinearLayout>

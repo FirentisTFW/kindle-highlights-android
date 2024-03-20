@@ -21,6 +21,7 @@ import com.firentistfw.kindlehighlights.ui.common.highlightlist.HighlightListFra
 import com.firentistfw.kindlehighlights.ui.common.highlightlist.HighlightListType
 import com.firentistfw.kindlehighlights.ui.highlightlist.HighlightListActivity
 import com.firentistfw.kindlehighlights.ui.randomgenerator.RandomGeneratorActivity
+import com.firentistfw.kindlehighlights.ui.selections.SelectionsActivity
 import com.firentistfw.kindlehighlights.utils.ToastUtils
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -41,6 +42,7 @@ class MainActivity : BaseActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
@@ -65,7 +67,8 @@ class MainActivity : BaseActivity() {
         when (item.itemId) {
             R.id.miCategories -> goToCategoryListView()
             R.id.miAddCategory -> goToAddCategoryView()
-            R.id.miAllHighlights -> goToHighlightListView()
+            R.id.miHighlights -> goToHighlightListView()
+            R.id.miSelections -> goToSelectionsView()
             R.id.miImportHighlights -> ensureStoragePermissionAndImportHighlights()
             R.id.miRandomGenerator -> goToRandomGeneratorView()
         }
@@ -145,6 +148,12 @@ class MainActivity : BaseActivity() {
 
     private fun goToHighlightListView() {
         Intent(this, HighlightListActivity::class.java).also {
+            startActivity(it)
+        }
+    }
+
+    private fun goToSelectionsView() {
+        Intent(this, SelectionsActivity::class.java).also {
             startActivity(it)
         }
     }
