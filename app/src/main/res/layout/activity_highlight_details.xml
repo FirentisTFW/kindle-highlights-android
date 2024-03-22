@@ -1,151 +1,156 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/container"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:padding="20dp"
-    tools:context="com.firentistfw.kindlehighlights.ui.highlightdetails.HighlightDetailsActivity">
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent">
 
     <LinearLayout
+        android:id="@+id/container"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="20dp"
+        tools:context="com.firentistfw.kindlehighlights.ui.highlightdetails.HighlightDetailsActivity">
 
-        <View
-            android:layout_width="24dp"
-            android:layout_height="24dp"
-            android:background="@drawable/ic_open_book" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <View
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:background="@drawable/ic_open_book" />
+
+            <TextView
+                style="@style/HeadlineMediumText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:text="@string/quote" />
+
+        </LinearLayout>
 
         <TextView
-            style="@style/HeadlineMediumText"
-            android:layout_width="wrap_content"
+            android:id="@+id/tvQuote"
+            style="@style/QuoteText"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="10dp"
-            android:text="@string/quote" />
-
-    </LinearLayout>
-
-    <TextView
-        android:id="@+id/tvQuote"
-        style="@style/QuoteText"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:textAlignment="center" />
-
-    <View
-        android:id="@+id/divider"
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:layout_marginTop="10dp" />
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp">
+            android:layout_marginTop="10dp"
+            android:textAlignment="center" />
 
         <View
-            android:layout_width="24dp"
-            android:layout_height="24dp"
-            android:background="@drawable/ic_pen" />
+            android:id="@+id/divider"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginTop="10dp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp">
+
+            <View
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:background="@drawable/ic_pen" />
+
+            <TextView
+                style="@style/HeadlineMediumText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:text="@string/note" />
+
+        </LinearLayout>
 
         <TextView
-            style="@style/HeadlineMediumText"
+            android:id="@+id/tvNote"
+            style="@style/ContentText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="10dp"
-            android:text="@string/note" />
+            android:layout_marginTop="8dp" />
 
-    </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp">
 
-    <TextView
-        android:id="@+id/tvNote"
-        style="@style/ContentText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp" />
+            <View
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:background="@drawable/ic_open_book" />
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp">
+            <TextView
+                style="@style/HeadlineMediumText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:text="@string/book" />
 
-        <View
-            android:layout_width="24dp"
-            android:layout_height="24dp"
-            android:background="@drawable/ic_open_book" />
+        </LinearLayout>
 
         <TextView
-            style="@style/HeadlineMediumText"
+            android:id="@+id/tvBook"
+            style="@style/ContentText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="10dp"
-            android:text="@string/book" />
+            android:layout_marginTop="8dp" />
 
-    </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp">
 
-    <TextView
-        android:id="@+id/tvBook"
-        style="@style/ContentText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp" />
+            <View
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:background="@drawable/ic_calendar" />
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp">
+            <TextView
+                style="@style/HeadlineMediumText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:text="@string/date" />
 
-        <View
-            android:layout_width="24dp"
-            android:layout_height="24dp"
-            android:background="@drawable/ic_calendar" />
+        </LinearLayout>
 
         <TextView
-            style="@style/HeadlineMediumText"
+            android:id="@+id/tvDate"
+            style="@style/ContentText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="10dp"
-            android:text="@string/date" />
+            android:layout_marginTop="8dp" />
 
-    </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp">
 
-    <TextView
-        android:id="@+id/tvDate"
-        style="@style/ContentText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp" />
+            <View
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:background="@drawable/ic_label" />
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp">
+            <TextView
+                style="@style/HeadlineMediumText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:text="@string/categories" />
 
-        <View
-            android:layout_width="24dp"
-            android:layout_height="24dp"
-            android:background="@drawable/ic_label" />
+        </LinearLayout>
 
         <TextView
-            style="@style/HeadlineMediumText"
+            android:id="@+id/tvAssignedCategories"
+            style="@style/ContentText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="10dp"
-            android:text="@string/categories" />
+            android:layout_marginTop="8dp" />
 
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnManageCategories"
+            style="@style/PrimaryButton"
+            android:text="@string/highlightDetails_manageCategoriesButton" />
     </LinearLayout>
-
-    <TextView
-        android:id="@+id/tvAssignedCategories"
-        style="@style/ContentText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp" />
-
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/btnManageCategories"
-        style="@style/PrimaryButton"
-        android:text="@string/highlightDetails_manageCategoriesButton" />
-</LinearLayout>
+</ScrollView>
