@@ -33,6 +33,9 @@
     <string name="selections_categories">Selected categories</string>
     <string name="selections_manageCategoriesButton">Manage categories</string>
 
+    <string name="manageBookSelections_selectedBooks">Selected books</string>
+    <string name="manageBookSelections_otherBooks">Other books</string>
+
     <string name="main_highlightsImportedToast">Highlights successfully imported</string>
 
 </resources>

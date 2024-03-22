@@ -4,7 +4,6 @@ import android.os.Bundle
 import androidx.lifecycle.lifecycleScope
 import com.firentistfw.kindlehighlights.common.BaseActivity
 import com.firentistfw.kindlehighlights.databinding.ActivitySelectionsBinding
-import com.firentistfw.kindlehighlights.storage.tables.authorAndTitleDisplay
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class SelectionsActivity : BaseActivity() {
@@ -19,17 +18,28 @@ class SelectionsActivity : BaseActivity() {
         setContentView(binding.root)
 
         viewModel.fetchSelections()
+        initInteractions()
         initObservers()
+    }
+
+
+    override fun initInteractions() {
+        super.initInteractions()
+
+        binding.btnManageBooks.setOnClickListener {
+            val booksBottomSheet = ManageBookSelectionsBottomSheetFragment()
+            booksBottomSheet.show(supportFragmentManager, booksBottomSheet.tag)
+        }
     }
 
     private fun initObservers() {
         lifecycleScope.launchWhenStarted {
             viewModel.bookSelections.collect { selections ->
-                val bookNames = selections.map {
-                    it.book.authorAndTitleDisplay
+                val bookTitles = selections.map {
+                    it.book.title
                 }
 
-                binding.tvChosenBooks.text = bookNames.joinToString("\n")
+                binding.tvChosenBooks.text = bookTitles.joinToString("\n")
             }
         }
 

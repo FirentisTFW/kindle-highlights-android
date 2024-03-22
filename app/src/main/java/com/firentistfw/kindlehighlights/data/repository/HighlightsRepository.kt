@@ -36,11 +36,11 @@ class HighlightsRepository(
 
         repositoryScope.launch {
 
-            val bookConditions = selectionsRepository.getBookConditions()
-            val categoryConditions = selectionsRepository.getCategoryConditions()
+            val bookSelections = selectionsRepository.getBookSelections()
+            val categorySelections = selectionsRepository.getCategorySelections()
 
-            val categoryHighlights = highlightsDao.getForCategories(bookConditions.ids())
-            val bookHighlights = highlightsDao.getForBooks(categoryConditions.ids())
+            val categoryHighlights = highlightsDao.getForCategories(bookSelections.ids())
+            val bookHighlights = highlightsDao.getForBooks(categorySelections.ids())
             // FIXME Take randomly 5 elements
             val highlights = categoryHighlights + bookHighlights
 

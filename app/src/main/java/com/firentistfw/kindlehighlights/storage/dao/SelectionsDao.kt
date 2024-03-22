@@ -9,7 +9,7 @@ import androidx.room.Transaction
 import com.firentistfw.kindlehighlights.storage.model.BookSelection
 import com.firentistfw.kindlehighlights.storage.model.CategorySelection
 import com.firentistfw.kindlehighlights.storage.tables.SelectionCondition
-import com.firentistfw.kindlehighlights.storage.tables.SelectionConditionType
+import com.firentistfw.kindlehighlights.storage.tables.SelectionType
 import kotlinx.coroutines.flow.Flow
 
 @Dao
@@ -21,7 +21,7 @@ interface SelectionsDao {
     fun getAll(): List<SelectionCondition>
 
     @Query("SELECT * FROM 'selection-conditions' WHERE type LIKE :type")
-    fun getForConditionType(type: SelectionConditionType): List<SelectionCondition>
+    fun getForConditionType(type: SelectionType): List<SelectionCondition>
 
     @Transaction
     @Query(

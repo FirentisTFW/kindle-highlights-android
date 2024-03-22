@@ -3,6 +3,7 @@ package com.firentistfw.kindlehighlights.data.repository
 import com.firentistfw.kindlehighlights.storage.dao.BooksDao
 import com.firentistfw.kindlehighlights.storage.tables.DBBook
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.withContext
 
 class BooksRepository(private val booksDao: BooksDao) {
@@ -16,5 +17,9 @@ class BooksRepository(private val booksDao: BooksDao) {
 
     suspend fun getBooks(): List<DBBook> = withContext(Dispatchers.IO) {
         return@withContext booksDao.getAll()
+    }
+
+    fun getNotSelectedBooksFlow(): Flow<List<DBBook>> {
+        return booksDao.getNotSelectedFlow()
     }
 }
