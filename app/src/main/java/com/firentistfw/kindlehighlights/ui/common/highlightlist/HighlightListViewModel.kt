@@ -16,6 +16,8 @@ class HighlightListViewModel(
     private val _dataState = MutableLiveData<DataState<List<CompleteHighlight>>>()
     val dataState: LiveData<DataState<List<CompleteHighlight>>> get() = _dataState
 
+    private val highlightsCount = 5
+
     fun fetchHighlights(listType: HighlightListType) {
         _dataState.value = DataState.Loading()
 
@@ -23,7 +25,7 @@ class HighlightListViewModel(
             try {
                 val result = when (listType) {
                     All -> repository.getAllHighlights()
-                    Daily -> repository.getDailyHighlights()
+                    Daily -> repository.getDailyHighlights(highlightsCount)
                 }
                 _dataState.value = DataState.Success(result)
             } catch (e: Exception) {

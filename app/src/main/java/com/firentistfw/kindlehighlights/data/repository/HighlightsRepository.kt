@@ -1,16 +1,16 @@
 package com.firentistfw.kindlehighlights.data.repository
 
-import com.firentistfw.kindlehighlights.common.mocks.Mocks
 import com.firentistfw.kindlehighlights.storage.dao.HighlightsDao
 import com.firentistfw.kindlehighlights.storage.model.CompleteHighlight
 import com.firentistfw.kindlehighlights.storage.tables.DBHighlight
 import com.firentistfw.kindlehighlights.storage.tables.SelectionCondition
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import java.util.UUID
+import kotlin.coroutines.resume
+import kotlin.coroutines.suspendCoroutine
 
 class HighlightsRepository(
     private val highlightsDao: HighlightsDao,
@@ -31,29 +31,28 @@ class HighlightsRepository(
         return@withContext highlightsDao.getAllComplete()
     }
 
-    suspend fun getDailyHighlights(): List<CompleteHighlight> {
+    suspend fun getDailyHighlights(count: Int): List<CompleteHighlight> {
         // FIXME First get data from cached daily source.
+        return suspendCoroutine { continuation ->
+            repositoryScope.launch {
+                val bookSelections = selectionsRepository.getBookSelections()
+                val categorySelections = selectionsRepository.getCategorySelections()
 
-        repositoryScope.launch {
+                val categoryHighlights = highlightsDao.getForCategories(categorySelections.selectionIds())
+                val bookHighlights = highlightsDao.getForBooks(bookSelections.selectionIds())
+                val allHighlights = categoryHighlights + bookHighlights
+                val selectedHighlights = List(count)  {
+                    allHighlights.random()
+                }.toSet().toList()
 
-            val bookSelections = selectionsRepository.getBookSelections()
-            val categorySelections = selectionsRepository.getCategorySelections()
-
-            val categoryHighlights = highlightsDao.getForCategories(bookSelections.ids())
-            val bookHighlights = highlightsDao.getForBooks(categorySelections.ids())
-            // FIXME Take randomly 5 elements
-            val highlights = categoryHighlights + bookHighlights
-
+                continuation.resume(selectedHighlights)
+            }
         }
-
-        delay(2000)
-
-        return listOf(Mocks.exampleHighlight, Mocks.exampleHighlight2)
     }
 }
 
-private fun List<SelectionCondition>.ids(): List<UUID> {
+private fun List<SelectionCondition>.selectionIds(): List<UUID> {
     return map {
-        it.id
+        it.selectionId
     }
 }
