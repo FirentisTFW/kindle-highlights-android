@@ -4,6 +4,7 @@ import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
+import androidx.room.Transaction
 import com.firentistfw.kindlehighlights.storage.tables.DBCategory
 import kotlinx.coroutines.flow.Flow
 import java.util.UUID
@@ -31,4 +32,13 @@ interface CategoriesDao {
                 "WHERE highlightId = :highlightId)"
     )
     fun getFlowNotForHighlight(highlightId: UUID): Flow<List<DBCategory>>
+
+    @Transaction
+    @Query(
+        "SELECT * FROM categories " +
+                "WHERE categoryId NOT IN " +
+                "(SELECT selectionId FROM `selection-conditions` " +
+                "WHERE type LIKE 'Category')"
+    )
+    fun getNotSelectedFlow(): Flow<List<DBCategory>>
 }

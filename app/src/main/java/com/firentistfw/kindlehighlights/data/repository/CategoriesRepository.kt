@@ -27,16 +27,6 @@ class CategoriesRepository(
             )
         }
 
-    suspend fun removeCategoryFromHighlight(categoryId: UUID, highlightId: UUID) =
-        withContext(Dispatchers.IO) {
-            return@withContext highlightCategoryCrossRefDao.delete(
-                HighlightCategoryCrossRef(
-                    categoryId,
-                    highlightId,
-                )
-            )
-        }
-
     suspend fun getCategories(): List<DBCategory> = withContext(Dispatchers.IO) {
         return@withContext categoriesDao.getAll()
     }
@@ -48,4 +38,18 @@ class CategoriesRepository(
     fun getPossibleCategoriesFlowForHighlight(highlightId: UUID): Flow<List<DBCategory>> {
         return categoriesDao.getFlowNotForHighlight(highlightId)
     }
+
+    fun getNotSelectedCategoriesFlow(): Flow<List<DBCategory>> {
+        return categoriesDao.getNotSelectedFlow()
+    }
+
+    suspend fun removeCategoryFromHighlight(categoryId: UUID, highlightId: UUID) =
+        withContext(Dispatchers.IO) {
+            return@withContext highlightCategoryCrossRefDao.delete(
+                HighlightCategoryCrossRef(
+                    categoryId,
+                    highlightId,
+                )
+            )
+        }
 }

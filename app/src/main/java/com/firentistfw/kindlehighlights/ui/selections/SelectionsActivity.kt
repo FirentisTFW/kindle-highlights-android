@@ -30,6 +30,10 @@ class SelectionsActivity : BaseActivity() {
             val booksBottomSheet = ManageBookSelectionsBottomSheetFragment()
             booksBottomSheet.show(supportFragmentManager, booksBottomSheet.tag)
         }
+        binding.btnManageCategories.setOnClickListener {
+            val categoriesBottomSheet = ManageCategorySelectionsBottomSheetFragment()
+            categoriesBottomSheet.show(supportFragmentManager, categoriesBottomSheet.tag)
+        }
     }
 
     private fun initObservers() {

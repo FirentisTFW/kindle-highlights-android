@@ -36,6 +36,9 @@
     <string name="manageBookSelections_selectedBooks">Selected books</string>
     <string name="manageBookSelections_otherBooks">Other books</string>
 
+    <string name="manageCategorySelections_selectedCategories">Selected categories</string>
+    <string name="manageCategorySelections_otherCategories">Other categories</string>
+
     <string name="main_highlightsImportedToast">Highlights successfully imported</string>
 
 </resources>
