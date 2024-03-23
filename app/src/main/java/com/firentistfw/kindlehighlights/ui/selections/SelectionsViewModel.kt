@@ -24,6 +24,8 @@ class SelectionsViewModel(
             selectionsRepository.getBookSelectionsFlow().collect {
                 _bookSelections.value = it
             }
+        }
+        viewModelScope.launch {
             selectionsRepository.getCategorySelectionsFlow().collect {
                 _categorySelections.value = it
             }
