@@ -1,5 +1,6 @@
 package com.firentistfw.kindlehighlights.data.repository
 
+import com.firentistfw.kindlehighlights.extensions.getUniqueRandomElements
 import com.firentistfw.kindlehighlights.storage.dao.HighlightsDao
 import com.firentistfw.kindlehighlights.storage.model.CompleteHighlight
 import com.firentistfw.kindlehighlights.storage.tables.DBHighlight
@@ -38,12 +39,15 @@ class HighlightsRepository(
                 val bookSelections = selectionsRepository.getBookSelections()
                 val categorySelections = selectionsRepository.getCategorySelections()
 
-                val categoryHighlights = highlightsDao.getForCategories(categorySelections.selectionIds())
+                val categoryHighlights =
+                    highlightsDao.getForCategories(categorySelections.selectionIds())
                 val bookHighlights = highlightsDao.getForBooks(bookSelections.selectionIds())
-                val allHighlights = categoryHighlights + bookHighlights
-                val selectedHighlights = List(count)  {
-                    allHighlights.random()
-                }.toSet().toList()
+                val allHighlights = mutableListOf<CompleteHighlight>().apply {
+                    addAll(categoryHighlights)
+                    addAll(bookHighlights)
+                }
+
+                val selectedHighlights = allHighlights.getUniqueRandomElements(count)
 
                 continuation.resume(selectedHighlights)
             }
@@ -53,7 +57,6 @@ class HighlightsRepository(
     suspend fun getHighlightById(id: UUID): CompleteHighlight = withContext(Dispatchers.IO) {
         return@withContext highlightsDao.getById(id)
     }
-
 }
 
 private fun List<SelectionCondition>.selectionIds(): List<UUID> {
