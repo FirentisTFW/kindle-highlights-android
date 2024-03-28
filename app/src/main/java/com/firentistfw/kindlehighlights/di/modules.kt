@@ -57,7 +57,7 @@ val servicesModule = module {
 val viewModelModule = module {
     viewModel { AddCategoryViewModel(get()) }
     viewModel { CategoryListViewModel(get()) }
-    viewModel { HighlightDetailsViewModel(get()) }
+    viewModel { HighlightDetailsViewModel(get(), get()) }
     viewModel { HighlightListViewModel(get()) }
     viewModel { MainViewModel(get(), get(), get(), get()) }
     viewModel { ManageBookSelectionsViewModel(get(), get()) }

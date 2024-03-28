@@ -3,11 +3,9 @@ package com.firentistfw.kindlehighlights.ui.common.highlightlist
 import android.content.Intent
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.firentistfw.kindlehighlights.common.Constants
 import com.firentistfw.kindlehighlights.databinding.ItemHighlightListCellBinding
 import com.firentistfw.kindlehighlights.storage.model.CompleteHighlight
 import com.firentistfw.kindlehighlights.ui.highlightdetails.HighlightDetailsActivity
-import com.firentistfw.kindlehighlights.ui.highlightdetails.HighlightDetailsArguments
 
 class HighlightListViewHolder(binding: ItemHighlightListCellBinding) :
     RecyclerView.ViewHolder(binding.root) {
@@ -27,7 +25,10 @@ class HighlightListViewHolder(binding: ItemHighlightListCellBinding) :
 
     private fun goToHighlightDetails(highlight: CompleteHighlight) {
         val intent = Intent(itemView.context, HighlightDetailsActivity::class.java)
-        intent.putExtra(Constants.argumentsKey, HighlightDetailsArguments(highlight))
+        intent.putExtra(
+            HighlightDetailsActivity.highlightIdKey,
+            highlight.highlight.highlightId.toString(),
+        )
         itemView.context.startActivity(intent)
     }
 }

@@ -49,6 +49,11 @@ class HighlightsRepository(
             }
         }
     }
+
+    suspend fun getHighlightById(id: UUID): CompleteHighlight = withContext(Dispatchers.IO) {
+        return@withContext highlightsDao.getById(id)
+    }
+
 }
 
 private fun List<SelectionCondition>.selectionIds(): List<UUID> {

@@ -26,6 +26,9 @@ interface HighlightsDao {
     // FIXME Rename
     suspend fun getAllComplete(): List<CompleteHighlight>
 
+    @Query("SELECT * FROM highlights WHERE highlightId = :id")
+    suspend fun getById(id: UUID): CompleteHighlight
+
     @Transaction
     @Query(
         "SELECT * FROM highlights " +
