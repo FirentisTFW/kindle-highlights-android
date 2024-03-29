@@ -87,7 +87,15 @@ class HighlightDetailsActivity : BaseActivity() {
 
     private fun fillHighlightData(highlight: CompleteHighlight) {
         binding.tvQuote.text = highlight.highlight.content
-        binding.tvNote.text = highlight.highlight.note
+
+        val note = highlight.highlight.note
+        if (note.isNullOrBlank()) {
+            binding.tvNote.visibility = View.GONE
+            binding.llNoteHeader.visibility = View.GONE
+        } else {
+            binding.tvNote.text = note
+        }
+
         binding.tvBook.text = highlight.book.authorAndTitleDisplay
         binding.tvDate.text = highlight.highlight.date
     }
