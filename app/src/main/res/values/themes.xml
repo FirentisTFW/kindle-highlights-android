@@ -18,12 +18,29 @@
 
     <style name="PrimaryButton">
         <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_height">60dp</item>
+        <item name="android:layout_height">50dp</item>
         <item name="android:layout_marginTop">20dp</item>
         <item name="android:fontFamily">@font/roboto</item>
         <item name="fontWeight">700</item>
         <item name="android:textSize">16sp</item>
         <item name="android:lineSpacingExtra">4sp</item>
         <item name="android:textStyle">bold</item>
+        <item name="android:background">@color/teal</item>
+
+    </style>
+
+    <style name="DangerButton">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">50dp</item>
+        <item name="android:layout_marginTop">20dp</item>
+        <item name="android:fontFamily">@font/roboto</item>
+        <item name="fontWeight">700</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:lineSpacingExtra">4sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textColor">@color/red</item>
+        <item name="android:backgroundTint">@color/white</item>
+        <item name="android:foreground">@drawable/border_red</item>
+        <item name="android:outlineProvider">none</item>
     </style>
 </resources>

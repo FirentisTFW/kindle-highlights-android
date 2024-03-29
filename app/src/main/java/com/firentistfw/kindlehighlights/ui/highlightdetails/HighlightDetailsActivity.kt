@@ -2,6 +2,7 @@ package com.firentistfw.kindlehighlights.ui.highlightdetails
 
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.lifecycleScope
 import com.firentistfw.kindlehighlights.R
@@ -37,7 +38,6 @@ class HighlightDetailsActivity : BaseActivity() {
 
         binding.divider.background = ContextCompat.getDrawable(this, R.drawable.divider)
 
-        initInteractions()
         initObservers()
 
         viewModel.fetchHighlight(highlightId)
@@ -65,7 +65,7 @@ class HighlightDetailsActivity : BaseActivity() {
                     val highlight = state.data
 
                     fillHighlightData(highlight)
-                    initCategoriesButtonInteractions(highlight)
+                    initButtonsInteractions(highlight)
                 }
             }
         }
@@ -100,11 +100,20 @@ class HighlightDetailsActivity : BaseActivity() {
         binding.tvDate.text = highlight.highlight.date
     }
 
-    private fun initCategoriesButtonInteractions(highlight: CompleteHighlight) {
+    private fun initButtonsInteractions(highlight: CompleteHighlight) {
         binding.btnManageCategories.setOnClickListener {
             val categoriesBottomSheet =
                 ManageHighlightCategoriesBottomSheetFragment(highlight.highlight.highlightId)
             categoriesBottomSheet.show(supportFragmentManager, categoriesBottomSheet.tag)
+        }
+
+        binding.btnRemoveHighlight.setOnClickListener {
+            // FIXME Show confirmation dialog
+
+            viewModel.deleteHighlight(highlight.highlight)
+            finish()
+
+            // TODO Update highlight list
         }
     }
 }

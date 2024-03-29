@@ -57,6 +57,10 @@ class HighlightsRepository(
     suspend fun getHighlightById(id: UUID): CompleteHighlight = withContext(Dispatchers.IO) {
         return@withContext highlightsDao.getById(id)
     }
+
+    suspend fun deleteHighlight(highlight: DBHighlight) = withContext(Dispatchers.IO) {
+        return@withContext highlightsDao.delete(highlight)
+    }
 }
 
 private fun List<SelectionCondition>.selectionIds(): List<UUID> {

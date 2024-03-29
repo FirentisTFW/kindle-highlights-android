@@ -44,6 +44,7 @@
             android:layout_marginTop="10dp" />
 
         <LinearLayout
+            android:id="@+id/llNoteHeader"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp">
@@ -151,5 +152,11 @@
             android:id="@+id/btnManageCategories"
             style="@style/PrimaryButton"
             android:text="@string/highlightDetails_manageCategoriesButton" />
+
+        <!-- FIXME Give this button proper onTap feedback -->
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnRemoveHighlight"
+            style="@style/DangerButton"
+            android:text="@string/highlightDetails_removeHighlightButton" />
     </LinearLayout>
 </ScrollView>

@@ -9,6 +9,7 @@ import com.firentistfw.kindlehighlights.data.repository.CategoriesRepository
 import com.firentistfw.kindlehighlights.data.repository.HighlightsRepository
 import com.firentistfw.kindlehighlights.storage.model.CompleteHighlight
 import com.firentistfw.kindlehighlights.storage.tables.DBCategory
+import com.firentistfw.kindlehighlights.storage.tables.DBHighlight
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -42,6 +43,16 @@ class HighlightDetailsViewModel(
         viewModelScope.launch {
             categoriesRepository.getAssignedCategoriesFlowForHighlight(highlightId).collect {
                 _assignedCategories.value = it
+            }
+        }
+    }
+
+    fun deleteHighlight(highlight: DBHighlight) {
+        viewModelScope.launch {
+            try {
+                highlightsRepository.deleteHighlight(highlight)
+            } catch (e: Exception) {
+                // FIXME Handle exception
             }
         }
     }

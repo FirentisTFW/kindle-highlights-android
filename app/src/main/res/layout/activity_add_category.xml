@@ -12,7 +12,7 @@
         android:id="@+id/etCategoryName"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/border"
+        android:background="@drawable/border_teal"
         android:hint="@string/addCategory_categoryNameHint"
         android:inputType="textCapSentences"
         android:padding="10dp"
