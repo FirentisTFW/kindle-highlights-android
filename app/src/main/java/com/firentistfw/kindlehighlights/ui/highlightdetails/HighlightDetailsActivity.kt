@@ -1,5 +1,6 @@
 package com.firentistfw.kindlehighlights.ui.highlightdetails
 
+import android.app.AlertDialog
 import android.os.Bundle
 import android.util.Log
 import android.view.View
@@ -10,6 +11,7 @@ import com.firentistfw.kindlehighlights.common.BaseActivity
 import com.firentistfw.kindlehighlights.common.DataState
 import com.firentistfw.kindlehighlights.databinding.ActivityHighlightDetailsBinding
 import com.firentistfw.kindlehighlights.storage.model.CompleteHighlight
+import com.firentistfw.kindlehighlights.storage.tables.DBHighlight
 import com.firentistfw.kindlehighlights.storage.tables.authorAndTitleDisplay
 import com.firentistfw.kindlehighlights.ui.managehighlightcategories.ManageHighlightCategoriesBottomSheetFragment
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -108,12 +110,22 @@ class HighlightDetailsActivity : BaseActivity() {
         }
 
         binding.btnRemoveHighlight.setOnClickListener {
-            // FIXME Show confirmation dialog
-
-            viewModel.deleteHighlight(highlight.highlight)
-            finish()
-
-            // TODO Update highlight list
+            showDeleteHighlightConfirmationDialog(highlight)
         }
+    }
+
+    private fun showDeleteHighlightConfirmationDialog(highlight: CompleteHighlight) {
+        AlertDialog.Builder(this)
+            .setTitle(R.string.highlightDetails_removeHighlightConfirmationDialog_title)
+            .setMessage(R.string.highlightDetails_removeHighlightConfirmationDialog_message)
+            .setPositiveButton(R.string.common_yes) { _, _ -> deleteHighlight(highlight.highlight) }
+            .setNegativeButton(R.string.common_no, null)
+            .show()
+    }
+
+    private fun deleteHighlight(highlight: DBHighlight) {
+        viewModel.deleteHighlight(highlight)
+        finish()
+        // TODO Update highlight list (as one of its items could've just been deleted)
     }
 }
