@@ -1,21 +1,23 @@
 <resources>
     <string name="app_name">Kindle Highlights</string>
-    <string name="quote">Quote</string>
-    <string name="note">Note</string>
-    <string name="book">Book</string>
-    <string name="date">Date</string>
-    <string name="categories">Categories</string>
 
     <string name="common_yes">Yes</string>
     <string name="common_no">No</string>
 
+    <string name="addCategory_categoryNameHint">Category name</string>
+    <string name="addCategory_addCategoryButton">Add category</string>
+    <string name="addCategory_categoryAddedToast">Category added successfully</string>
+
+    <string name="highlightDetails_quote">Quote</string>
+    <string name="highlightDetails_note">Note</string>
+    <string name="highlightDetails_book">Book</string>
+    <string name="highlightDetails_date">Date</string>
+    <string name="highlightDetails_categories">Categories</string>
     <string name="highlightDetails_manageCategoriesButton">Manage categories</string>
     <string name="highlightDetails_noCategoriesAssigned">No categories were assigned to this highlight yet</string>
     <string name="highlightDetails_removeHighlightButton">Remove highlight</string>
     <string name="highlightDetails_removeHighlightConfirmationDialog_title">Remove highlight</string>
     <string name="highlightDetails_removeHighlightConfirmationDialog_message">Are you sure you want to delete this highlight?</string>
-    <string name="toastUtils_featureNotAvailable">This feature is not available yet.</string>
-    <string name="toastUtils_genericError">Something went wrong. Please try again.</string>
 
     <string name="homeMenu_item_categories">Categories</string>
     <string name="homeMenu_item_addCategory">Add category</string>
@@ -24,21 +26,7 @@
     <string name="homeMenu_item_selections">Selections</string>
     <string name="homeMenu_item_randomGenerator">Generate random data</string>
 
-    <string name="addCategory_categoryNameHint">Category name</string>
-    <string name="addCategory_addCategoryButton">Add category</string>
-    <string name="addCategory_categoryAddedToast">Category added successfully</string>
-
-    <string name="randomGenerator_addBookButton">Add random book</string>
-    <string name="randomGenerator_addHighlightButton">Add random highlight</string>
-    <string name="randomGenerator_addCategoryButton">Add random category</string>
-
-    <string name="manageHighlightCategories_assignedCategories">Assigned categories</string>
-    <string name="manageHighlightCategories_otherCategories">Other categories</string>
-
-    <string name="selections_books">Selected Books</string>
-    <string name="selections_manageBooksButton">Manage books</string>
-    <string name="selections_categories">Selected categories</string>
-    <string name="selections_manageCategoriesButton">Manage categories</string>
+    <string name="main_highlightsImportedToast">Highlights successfully imported</string>
 
     <string name="manageBookSelections_selectedBooks">Selected books</string>
     <string name="manageBookSelections_otherBooks">Other books</string>
@@ -46,6 +34,19 @@
     <string name="manageCategorySelections_selectedCategories">Selected categories</string>
     <string name="manageCategorySelections_otherCategories">Other categories</string>
 
-    <string name="main_highlightsImportedToast">Highlights successfully imported</string>
+    <string name="manageHighlightCategories_assignedCategories">Assigned categories</string>
+    <string name="manageHighlightCategories_otherCategories">Other categories</string>
+
+    <string name="randomGenerator_addBookButton">Add random book</string>
+    <string name="randomGenerator_addHighlightButton">Add random highlight</string>
+    <string name="randomGenerator_addCategoryButton">Add random category</string>
+
+    <string name="selections_books">Selected Books</string>
+    <string name="selections_manageBooksButton">Manage books</string>
+    <string name="selections_categories">Selected categories</string>
+    <string name="selections_manageCategoriesButton">Manage categories</string>
+
+    <string name="toastUtils_featureNotAvailable">This feature is not available yet.</string>
+    <string name="toastUtils_genericError">Something went wrong. Please try again.</string>
 
 </resources>
