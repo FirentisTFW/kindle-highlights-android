@@ -9,6 +9,7 @@ import com.firentistfw.kindlehighlights.data.repository.HighlightsRepository
 import com.firentistfw.kindlehighlights.storage.model.CompleteHighlight
 import com.firentistfw.kindlehighlights.ui.common.highlightlist.HighlightListType.*
 import kotlinx.coroutines.launch
+import java.util.Date
 
 class HighlightListViewModel(
     private val repository: HighlightsRepository,
@@ -25,7 +26,7 @@ class HighlightListViewModel(
             try {
                 val result = when (listType) {
                     All -> repository.getAllHighlights()
-                    Daily -> repository.getDailyHighlights(highlightsCount)
+                    Daily -> repository.getDailyHighlights(highlightsCount, Date())
                 }
                 _dataState.value = DataState.Success(result)
             } catch (e: Exception) {

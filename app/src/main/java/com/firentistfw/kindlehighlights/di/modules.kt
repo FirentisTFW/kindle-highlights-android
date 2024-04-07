@@ -2,6 +2,7 @@ package com.firentistfw.kindlehighlights.di
 
 import androidx.room.Room
 import com.firentistfw.kindlehighlights.data.repository.BooksRepository
+import com.firentistfw.kindlehighlights.data.repository.CachedDailyHighlightsRepository
 import com.firentistfw.kindlehighlights.data.repository.CategoriesRepository
 import com.firentistfw.kindlehighlights.data.repository.HighlightsRepository
 import com.firentistfw.kindlehighlights.data.repository.LocalFilesRepository
@@ -44,8 +45,9 @@ val localStorageModule = module {
 
 val repositoryModule = module {
     single { BooksRepository(get()) }
+    single { CachedDailyHighlightsRepository(get()) }
     single { CategoriesRepository(get(), get()) }
-    single { HighlightsRepository(get(), get()) }
+    single { HighlightsRepository(get(), get(), get()) }
     single { LocalFilesRepository(get()) }
     single { SelectionsRepository(get()) }
 }
