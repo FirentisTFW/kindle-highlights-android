@@ -5,6 +5,7 @@ import com.firentistfw.kindlehighlights.data.repository.BooksRepository
 import com.firentistfw.kindlehighlights.data.repository.CachedDailyHighlightsRepository
 import com.firentistfw.kindlehighlights.data.repository.CategoriesRepository
 import com.firentistfw.kindlehighlights.data.repository.HighlightsRepository
+import com.firentistfw.kindlehighlights.data.repository.ImportDetailsRepository
 import com.firentistfw.kindlehighlights.data.repository.LocalFilesRepository
 import com.firentistfw.kindlehighlights.data.repository.SelectionsRepository
 import com.firentistfw.kindlehighlights.storage.AppDatabase
@@ -47,6 +48,7 @@ val repositoryModule = module {
     single { BooksRepository(get()) }
     single { CachedDailyHighlightsRepository(get()) }
     single { CategoriesRepository(get(), get()) }
+    single { ImportDetailsRepository(get()) }
     single { HighlightsRepository(get(), get(), get()) }
     single { LocalFilesRepository(get()) }
     single { SelectionsRepository(get()) }
