@@ -118,7 +118,7 @@ class HighlightsRepository(
         currentDate: Date,
     ) {
         val ids = highlights.map { it.highlight.highlightId.toString() }.toSet()
-        cachedDailyHighlightsRepository.cacheHighlightsIds(ids, currentDate)
+        cachedDailyHighlightsRepository.storeHighlightsIds(ids, currentDate)
     }
 }
 

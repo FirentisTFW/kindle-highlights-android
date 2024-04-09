@@ -24,7 +24,7 @@ class CachedDailyHighlightsRepository(private val context: Context) {
         return sharedPreferences.getStringSet(KEY_HIGHLIGHTS_IDS, emptySet()) ?: emptySet()
     }
 
-    fun cacheHighlightsIds(ids: Set<String>, date: Date) {
+    fun storeHighlightsIds(ids: Set<String>, date: Date) {
         sharedPreferences.edit().putStringSet(KEY_HIGHLIGHTS_IDS, ids).apply()
         sharedPreferences.edit().putLong(KEY_CACHE_DATE, date.time).apply()
     }
