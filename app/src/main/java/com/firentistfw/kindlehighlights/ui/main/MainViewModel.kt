@@ -34,21 +34,8 @@ class MainViewModel(
                 val importedHighlights =
                     clippingsParser.createHighlightsFromRawClippingsInput(content)
 
-                val books = importedHighlights.map(ImportedHighlight::book).toSet().map {
-                    DBBook(
-                        bookId = UUID.randomUUID(),
-                        author = it.author,
-                        title = it.title,
-                    )
-                }
-
-                val highlights = importedHighlights.map { importedHighlight ->
-                    val book = books.first {
-                        it.author == importedHighlight.book.author &&
-                                it.title == importedHighlight.book.title
-                    }
-                    importedHighlight.mapToHighlight(book.bookId)
-                }
+                val books = importedHighlights.mapToBooks()
+                val highlights = importedHighlights.mapToHighlights(books)
 
                 booksRepository.addBooks(books)
                 highlightsRepository.addHighlights(highlights)
@@ -61,6 +48,26 @@ class MainViewModel(
     }
 }
 
+private fun List<ImportedHighlight>.mapToBooks(): List<DBBook> {
+    return map(ImportedHighlight::book).toSet().map {
+        DBBook(
+            bookId = UUID.randomUUID(),
+            author = it.author,
+            title = it.title,
+        )
+    }
+}
+
+private fun List<ImportedHighlight>.mapToHighlights(books: List<DBBook>): List<DBHighlight> {
+    return map { importedHighlight ->
+        val book = books.first {
+            it.author == importedHighlight.book.author &&
+                    it.title == importedHighlight.book.title
+        }
+        importedHighlight.mapToHighlight(book.bookId)
+    }
+}
+
 private fun ImportedHighlight.mapToHighlight(bookId: UUID): DBHighlight {
     return DBHighlight(
         highlightId = UUID.randomUUID(),
@@ -70,3 +77,4 @@ private fun ImportedHighlight.mapToHighlight(bookId: UUID): DBHighlight {
         note = note,
     )
 }
+
