@@ -1,5 +1,6 @@
 package com.firentistfw.kindlehighlights.ui.main
 
+import android.icu.text.SimpleDateFormat
 import android.net.Uri
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -8,22 +9,28 @@ import com.firentistfw.kindlehighlights.common.BaseViewModel
 import com.firentistfw.kindlehighlights.common.RequestState
 import com.firentistfw.kindlehighlights.data.repository.BooksRepository
 import com.firentistfw.kindlehighlights.data.repository.HighlightsRepository
+import com.firentistfw.kindlehighlights.data.repository.ImportDetailsRepository
 import com.firentistfw.kindlehighlights.data.repository.LocalFilesRepository
 import com.firentistfw.kindlehighlights.models.ImportedHighlight
 import com.firentistfw.kindlehighlights.storage.tables.DBBook
 import com.firentistfw.kindlehighlights.storage.tables.DBHighlight
 import com.firentistfw.kindlehighlights.utils.KindleClippingsParser
 import kotlinx.coroutines.launch
+import java.util.Date
+import java.util.Locale
 import java.util.UUID
 
 class MainViewModel(
     private val localFilesRepository: LocalFilesRepository,
     private val highlightsRepository: HighlightsRepository,
+    private val importDetailsRepository: ImportDetailsRepository,
     private val booksRepository: BooksRepository,
     private val clippingsParser: KindleClippingsParser,
 ) : BaseViewModel() {
     private val _fileImportRequestState = MutableLiveData<RequestState<Nothing>>()
     val fileImportRequestState: LiveData<RequestState<Nothing>> get() = _fileImportRequestState
+
+    private val dateFormatter = DateFormatter()
 
     fun importHighlightsFromFile(uri: Uri) {
         _fileImportRequestState.value = RequestState.Ongoing()
@@ -37,13 +44,44 @@ class MainViewModel(
                 val books = importedHighlights.mapToBooks()
                 val highlights = importedHighlights.mapToHighlights(books)
 
+                val newHighlights = getNewHighlights(highlights)
+                // FIXME Filter out books that are already imported
+
                 booksRepository.addBooks(books)
-                highlightsRepository.addHighlights(highlights)
+                highlightsRepository.addHighlights(newHighlights)
+
+                val lastHighlight = highlights.lastOrNull()
+                if (lastHighlight != null) storeLastImportedHighlightDate(lastHighlight)
 
                 _fileImportRequestState.value = RequestState.Success()
             } catch (e: Exception) {
                 _fileImportRequestState.value = RequestState.Error(e.message)
             }
+        }
+    }
+
+    private fun getNewHighlights(highlights: List<DBHighlight>): List<DBHighlight> {
+        val lastImportedHighlightDate =
+            importDetailsRepository.getLastImportedHighlightDate() ?: return highlights
+        val lastImportedHighlightIndex = highlights.binarySearchBy(lastImportedHighlightDate) {
+            dateFormatter.convertHighlightStringDateToDate(it.date)
+        }
+
+        return highlights.subList(lastImportedHighlightIndex + 1, highlights.size)
+    }
+
+    private fun storeLastImportedHighlightDate(highlight: DBHighlight) {
+        val date = dateFormatter.convertHighlightStringDateToDate(highlight.date)
+        importDetailsRepository.storeLastImportedHighlightDate(date)
+    }
+
+    private class DateFormatter {
+        companion object {
+            private val dateFormatter = SimpleDateFormat("MMMM d, y h:mm:s a", Locale.US)
+        }
+
+        fun convertHighlightStringDateToDate(highlightDate: String): Date {
+            return dateFormatter.parse(highlightDate)
         }
     }
 }
@@ -61,8 +99,7 @@ private fun List<ImportedHighlight>.mapToBooks(): List<DBBook> {
 private fun List<ImportedHighlight>.mapToHighlights(books: List<DBBook>): List<DBHighlight> {
     return map { importedHighlight ->
         val book = books.first {
-            it.author == importedHighlight.book.author &&
-                    it.title == importedHighlight.book.title
+            it.author == importedHighlight.book.author && it.title == importedHighlight.book.title
         }
         importedHighlight.mapToHighlight(book.bookId)
     }

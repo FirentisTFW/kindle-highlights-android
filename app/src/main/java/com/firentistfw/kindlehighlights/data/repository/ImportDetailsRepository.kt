@@ -14,8 +14,9 @@ class ImportDetailsRepository(private val context: Context) {
         context.getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE)
     }
 
-    fun getLastImportedHighlightDate(): Date {
+    fun getLastImportedHighlightDate(): Date? {
         val timestamp = sharedPreferences.getLong(KEY_LAST_IMPORTED_HIGHLIGHT_DATE, 0L)
+        if (timestamp == 0L) return null
         return Date(timestamp)
     }
 

@@ -63,7 +63,7 @@ val viewModelModule = module {
     viewModel { CategoryListViewModel(get()) }
     viewModel { HighlightDetailsViewModel(get(), get()) }
     viewModel { HighlightListViewModel(get()) }
-    viewModel { MainViewModel(get(), get(), get(), get()) }
+    viewModel { MainViewModel(get(), get(), get(), get(), get()) }
     viewModel { ManageBookSelectionsViewModel(get(), get()) }
     viewModel { ManageCategorySelectionsViewModel(get(), get()) }
     viewModel { ManageHighlightCategoriesViewModel(get()) }
