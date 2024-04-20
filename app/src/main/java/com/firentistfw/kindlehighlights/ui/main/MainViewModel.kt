@@ -45,9 +45,9 @@ class MainViewModel(
                 val highlights = importedHighlights.mapToHighlights(books)
 
                 val newHighlights = getNewHighlights(highlights)
-                // FIXME Filter out books that are already imported
+                val newBooks = getNewBooks(books.take(4))
 
-                booksRepository.addBooks(books)
+                booksRepository.addBooks(newBooks)
                 highlightsRepository.addHighlights(newHighlights)
 
                 val lastHighlight = highlights.lastOrNull()
@@ -63,11 +63,21 @@ class MainViewModel(
     private fun getNewHighlights(highlights: List<DBHighlight>): List<DBHighlight> {
         val lastImportedHighlightDate =
             importDetailsRepository.getLastImportedHighlightDate() ?: return highlights
-        val lastImportedHighlightIndex = highlights.binarySearchBy(lastImportedHighlightDate) {
-            dateFormatter.convertHighlightStringDateToDate(it.date)
+        val lastImportedHighlightIndex = highlights.indexOfLast {
+            dateFormatter.convertHighlightStringDateToDate(it.date) == lastImportedHighlightDate
         }
 
         return highlights.subList(lastImportedHighlightIndex + 1, highlights.size)
+    }
+
+    private suspend fun getNewBooks(books: List<DBBook>): List<DBBook> {
+        val importedBooks = booksRepository.getBooks()
+        return books.filter { book ->
+            val bookAlreadyImported = importedBooks.any { importedBook ->
+                importedBook.author == book.author && importedBook.title == book.title
+            }
+            !bookAlreadyImported
+        }
     }
 
     private fun storeLastImportedHighlightDate(highlight: DBHighlight) {
@@ -76,9 +86,7 @@ class MainViewModel(
     }
 
     private class DateFormatter {
-        companion object {
-            private val dateFormatter = SimpleDateFormat("MMMM d, y h:mm:s a", Locale.US)
-        }
+        private val dateFormatter = SimpleDateFormat("MMMM d, y h:mm:s a", Locale.US)
 
         fun convertHighlightStringDateToDate(highlightDate: String): Date {
             return dateFormatter.parse(highlightDate)
