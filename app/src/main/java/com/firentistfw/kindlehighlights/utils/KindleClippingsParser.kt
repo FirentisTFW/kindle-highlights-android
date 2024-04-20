@@ -34,7 +34,7 @@ class KindleClippingsParser() {
         return clippingBundles.map {
             val clippingParts = it.highlightRaw.split("\n").filterNotEmpty()
             val note = it.noteRaw?.split("\n")?.filterNotEmpty()?.last()
-            val bookTitleAndAuthor = clippingParts.first().trim()
+            val bookTitleAndAuthor = clippingParts.first().trim().removeBom()
             val title = bookTitleAndAuthor.substringUntil("(").trim()
             val author = bookTitleAndAuthor.substringFrom("(").removeParenthesis()
             val content = clippingParts.last()
@@ -51,7 +51,6 @@ class KindleClippingsParser() {
             )
         }
     }
-
 }
 
 private val String.isBookmark: Boolean
@@ -59,3 +58,5 @@ private val String.isBookmark: Boolean
 
 private val String.isNote: Boolean
     get() = contains("Your Note on")
+
+private fun String.removeBom(): String = replace("\uFEFF", "")
