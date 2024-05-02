@@ -45,7 +45,7 @@ class MainViewModel(
                 val highlights = importedHighlights.mapToHighlights(books)
 
                 val newHighlights = getNewHighlights(highlights)
-                val newBooks = getNewBooks(books.take(4))
+                val newBooks = getNewBooks(books)
 
                 booksRepository.addBooks(newBooks)
                 highlightsRepository.addHighlights(newHighlights)
