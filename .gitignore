@@ -71,3 +71,6 @@ lint/generated/
 lint/outputs/
 lint/tmp/
 # lint/reports/
+
+# signing keys
+/app/key/
