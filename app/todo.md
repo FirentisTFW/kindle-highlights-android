@@ -1,6 +1,6 @@
 # TODO
 
-- Display category in highlight cell
-- Take home screen data from device storage
-- Fix colors naming (primary instead of black etc.) for easier support for dark mode in the future
-- Add persistence for conditions defined by user 
+- Use abstraction in colors naming (primary instead of black etc.) for easier support for dark mode in the future
+- Migrate to Jetpack Compose
+- Improve UI, const out values
+- Add support for dark theme
