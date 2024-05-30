@@ -9,6 +9,7 @@ import android.view.Menu
 import android.view.MenuItem
 import android.view.View
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.app.ActivityCompat
 import com.firentistfw.kindlehighlights.BuildConfig
 import com.firentistfw.kindlehighlights.R
@@ -41,6 +42,9 @@ class MainActivity : BaseActivity() {
         }
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        // TODO Remove this and add support for dark theme
+        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+
         super.onCreate(savedInstanceState)
 
         binding = ActivityMainBinding.inflate(layoutInflater)
