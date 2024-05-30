@@ -22,4 +22,12 @@ object TextStyles {
         fontSize = 16.sp,
         color = Colors.black,
     )
+
+    val primaryButton = TextStyle(
+        fontFamily = robotoFontFamily,
+        fontSize = 16.sp,
+        fontWeight = FontWeight.Bold,
+        color = Colors.white,
+        letterSpacing = 1.3.sp,
+    )
 }
