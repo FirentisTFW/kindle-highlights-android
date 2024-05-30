@@ -24,7 +24,6 @@ fun CategoryListScreen(
     dataState: DataState<List<DBCategory>>?,
     onCategoryClick: (categoryId: UUID) -> Unit,
 ) {
-    // FIXME Accept onTap for list items
     when (dataState) {
         is DataState.Error -> Text(text = "An error occurred", modifier = Modifier.fillMaxSize())
         is DataState.Loading, null -> CircularProgressIndicator()
