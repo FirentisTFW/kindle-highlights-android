@@ -4,6 +4,7 @@
     <string name="common_yes">Yes</string>
     <string name="common_no">No</string>
 
+    <string name="addCategory_appBarTitle">Add category</string>
     <string name="addCategory_categoryNameHint">Category name</string>
     <string name="addCategory_addCategoryButton">Add category</string>
     <string name="addCategory_categoryAddedToast">Category added successfully</string>
