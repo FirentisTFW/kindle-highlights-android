@@ -4,6 +4,7 @@ import android.Manifest
 import android.app.Activity
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.os.Build
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
@@ -31,7 +32,6 @@ class MainActivity : BaseActivity() {
     private lateinit var binding: ActivityMainBinding
 
     private val importHighlightsPermissionRequestCode = 0
-    private val importHighlightsPermission = Manifest.permission.READ_EXTERNAL_STORAGE
 
     private val pickTextFileLauncher =
         registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
@@ -93,7 +93,7 @@ class MainActivity : BaseActivity() {
         for (i in permissions.indices) {
             if (grantResults[i] == PackageManager.PERMISSION_GRANTED) {
                 when (permissions[i]) {
-                    importHighlightsPermission -> importHighlights()
+                    getImportHighlightsPermission() -> importHighlights()
                 }
             }
         }
@@ -126,16 +126,25 @@ class MainActivity : BaseActivity() {
     }
 
     private fun ensureStoragePermissionAndImportHighlights() {
+        val permission = getImportHighlightsPermission()
         val storagePermissionStatus =
-            ActivityCompat.checkSelfPermission(this, importHighlightsPermission)
+            ActivityCompat.checkSelfPermission(this, permission)
 
         if (storagePermissionStatus == PackageManager.PERMISSION_GRANTED) {
             importHighlights()
         } else {
             ActivityCompat.requestPermissions(
-                this, arrayOf(importHighlightsPermission), importHighlightsPermissionRequestCode
+                this, arrayOf(permission), importHighlightsPermissionRequestCode
             )
         }
+    }
+
+    private fun getImportHighlightsPermission(): String {
+        if (Build.VERSION.SDK_INT > Build.VERSION_CODES.TIRAMISU) {
+            return Manifest.permission.READ_MEDIA_IMAGES
+        }
+
+        return Manifest.permission.READ_EXTERNAL_STORAGE
     }
 
     private fun goToAddCategoryView() {
