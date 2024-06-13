@@ -4,3 +4,4 @@
 - Migrate to Jetpack Compose
 - Improve UI, const out values
 - Add support for dark theme
+- Error views
