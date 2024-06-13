@@ -17,6 +17,23 @@ object TextStyles {
         Font(R.font.roboto_medium_italic, FontWeight.Medium, FontStyle.Italic),
     )
 
+    val content = TextStyle(
+        fontFamily = robotoFontFamily,
+        fontSize = 16.sp,
+        fontWeight = FontWeight.W400,
+        letterSpacing = 0.05.sp,
+        color = Colors.black,
+        lineHeight = 20.sp,
+    )
+
+    val headlineMedium = TextStyle(
+        fontFamily = robotoFontFamily,
+        fontSize = 16.sp,
+        fontWeight = FontWeight.Bold,
+        letterSpacing = 0.05.sp,
+        color = Colors.black,
+    )
+
     val subtitle = TextStyle(
         fontFamily = robotoFontFamily,
         fontSize = 16.sp,
@@ -29,5 +46,14 @@ object TextStyles {
         fontWeight = FontWeight.Bold,
         color = Colors.white,
         letterSpacing = 1.3.sp,
+    )
+
+    val quote = TextStyle(
+        fontFamily = robotoFontFamily,
+        fontSize = 16.sp,
+        fontWeight = FontWeight.W400,
+        fontStyle = FontStyle.Italic,
+        color = Colors.black,
+        lineHeight = 22.sp,
     )
 }

@@ -13,7 +13,6 @@
         <item name="android:textColor">@color/black</item>
     </style>
 
-
     <style name="QuoteText">
         <item name="android:fontFamily">@font/roboto</item>
         <item name="android:textColor">@color/black</item>
