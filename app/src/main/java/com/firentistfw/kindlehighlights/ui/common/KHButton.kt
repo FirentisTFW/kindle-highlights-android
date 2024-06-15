@@ -10,8 +10,8 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import com.firentistfw.kindlehighlights.ui.styles.Colors
-import com.firentistfw.kindlehighlights.ui.styles.TextStyles
+import com.firentistfw.kindlehighlights.ui.styles.KHColors
+import com.firentistfw.kindlehighlights.ui.styles.KHTextStyles
 
 @Composable
 fun KHButton(
@@ -30,10 +30,10 @@ fun KHButton(
         ),
         enabled = enabled,
         colors = ButtonColors(
-            containerColor = Colors.teal,
-            contentColor = Colors.white,
-            disabledContainerColor = Colors.lightGrey,
-            disabledContentColor = Colors.white,
+            containerColor = KHColors.teal,
+            contentColor = KHColors.white,
+            disabledContainerColor = KHColors.lightGrey,
+            disabledContentColor = KHColors.white,
         ),
         contentPadding = PaddingValues(
             start = 16.dp,
@@ -42,6 +42,6 @@ fun KHButton(
             bottom = 16.dp,
         )
     ) {
-        Text(text.uppercase(), style = TextStyles.primaryButton)
+        Text(text.uppercase(), style = KHTextStyles.primaryButton)
     }
 }

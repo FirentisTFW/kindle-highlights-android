@@ -23,9 +23,9 @@ import androidx.compose.ui.unit.dp
 import com.firentistfw.kindlehighlights.R
 import com.firentistfw.kindlehighlights.common.DataState
 import com.firentistfw.kindlehighlights.storage.model.CompleteHighlight
-import com.firentistfw.kindlehighlights.ui.styles.Colors
-import com.firentistfw.kindlehighlights.ui.styles.Spacing
-import com.firentistfw.kindlehighlights.ui.styles.TextStyles
+import com.firentistfw.kindlehighlights.ui.styles.KHColors
+import com.firentistfw.kindlehighlights.ui.styles.KHSpacings
+import com.firentistfw.kindlehighlights.ui.styles.KHTextStyles
 
 // FIXME Finish this screen
 
@@ -49,9 +49,9 @@ private fun LoadedBody(
     Column(
         modifier = Modifier
             .fillMaxSize()
-            .background(Colors.white)
-            .padding(Spacing.xl),
-        verticalArrangement = Arrangement.spacedBy(Spacing.l)
+            .background(KHColors.white)
+            .padding(KHSpacings.xl),
+        verticalArrangement = Arrangement.spacedBy(KHSpacings.l)
     ) {
         QuoteSection(quote = "80% of success is showing up every day")
         Divider()
@@ -64,12 +64,12 @@ private fun LoadedBody(
 @Composable
 private fun QuoteSection(quote: String) {
     Column(
-        verticalArrangement = Arrangement.spacedBy(Spacing.m)
+        verticalArrangement = Arrangement.spacedBy(KHSpacings.m)
     ) {
         SectionHeader("Quote", R.drawable.ic_open_book)
         Text(
             text = quote,
-            style = TextStyles.quote,
+            style = KHTextStyles.quote,
         )
     }
 }
@@ -77,16 +77,16 @@ private fun QuoteSection(quote: String) {
 @Composable
 private fun BookSection(authorName: String, bookTitle: String) {
     Column(
-        verticalArrangement = Arrangement.spacedBy(Spacing.m)
+        verticalArrangement = Arrangement.spacedBy(KHSpacings.m)
     ) {
         SectionHeader("Book", R.drawable.ic_open_book)
         Text(
             text = authorName,
-            style = TextStyles.content,
+            style = KHTextStyles.content,
         )
         Text(
             text = bookTitle,
-            style = TextStyles.content,
+            style = KHTextStyles.content,
         )
     }
 }
@@ -94,12 +94,12 @@ private fun BookSection(authorName: String, bookTitle: String) {
 @Composable
 private fun DateSection(date: String) {
     Column(
-        verticalArrangement = Arrangement.spacedBy(Spacing.m)
+        verticalArrangement = Arrangement.spacedBy(KHSpacings.m)
     ) {
         SectionHeader("Date", R.drawable.ic_calendar)
         Text(
             text = date,
-            style = TextStyles.content,
+            style = KHTextStyles.content,
         )
     }
 }
@@ -118,10 +118,10 @@ private fun SectionHeader(
             modifier = Modifier
                 .size(24.dp)
         )
-        Box(modifier = Modifier.width(Spacing.m))
+        Box(modifier = Modifier.width(KHSpacings.m))
         Text(
             text = title.uppercase(),
-            style = TextStyles.headlineMedium,
+            style = KHTextStyles.headlineMedium,
         )
     }
 }
@@ -132,6 +132,6 @@ private fun Divider() {
         modifier = Modifier
             .fillMaxWidth()
             .height(1.dp)
-            .background(Colors.lightGrey)
+            .background(KHColors.lightGrey)
     )
 }

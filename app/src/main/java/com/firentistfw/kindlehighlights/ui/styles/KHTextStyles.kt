@@ -8,7 +8,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.sp
 import com.firentistfw.kindlehighlights.R
 
-object TextStyles {
+object KHTextStyles {
     private val robotoFontFamily = FontFamily(
         Font(R.font.roboto_bold, FontWeight.Bold),
         Font(R.font.roboto_regular, FontWeight.Normal),
@@ -22,7 +22,7 @@ object TextStyles {
         fontSize = 16.sp,
         fontWeight = FontWeight.W400,
         letterSpacing = 0.05.sp,
-        color = Colors.black,
+        color = KHColors.black,
         lineHeight = 20.sp,
     )
 
@@ -31,20 +31,20 @@ object TextStyles {
         fontSize = 16.sp,
         fontWeight = FontWeight.Bold,
         letterSpacing = 0.05.sp,
-        color = Colors.black,
+        color = KHColors.black,
     )
 
     val subtitle = TextStyle(
         fontFamily = robotoFontFamily,
         fontSize = 16.sp,
-        color = Colors.black,
+        color = KHColors.black,
     )
 
     val primaryButton = TextStyle(
         fontFamily = robotoFontFamily,
         fontSize = 16.sp,
         fontWeight = FontWeight.Bold,
-        color = Colors.white,
+        color = KHColors.white,
         letterSpacing = 1.3.sp,
     )
 
@@ -53,7 +53,7 @@ object TextStyles {
         fontSize = 16.sp,
         fontWeight = FontWeight.W400,
         fontStyle = FontStyle.Italic,
-        color = Colors.black,
+        color = KHColors.black,
         lineHeight = 22.sp,
     )
 }

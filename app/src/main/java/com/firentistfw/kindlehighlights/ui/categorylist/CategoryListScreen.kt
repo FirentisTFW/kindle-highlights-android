@@ -15,8 +15,8 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.ui.unit.dp
 import com.firentistfw.kindlehighlights.common.DataState
 import com.firentistfw.kindlehighlights.storage.tables.DBCategory
-import com.firentistfw.kindlehighlights.ui.styles.Colors
-import com.firentistfw.kindlehighlights.ui.styles.TextStyles
+import com.firentistfw.kindlehighlights.ui.styles.KHColors
+import com.firentistfw.kindlehighlights.ui.styles.KHTextStyles
 import java.util.UUID
 
 @Composable
@@ -55,7 +55,7 @@ private fun CategoryListCell(
     ) {
         Text(
             text = name,
-            style = TextStyles.subtitle,
+            style = KHTextStyles.subtitle,
         )
     }
 }
@@ -66,6 +66,6 @@ private fun Divider() {
         modifier = Modifier
             .fillMaxWidth()
             .height(1.dp)
-            .background(Colors.lightGrey)
+            .background(KHColors.lightGrey)
     )
 }
