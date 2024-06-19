@@ -12,6 +12,8 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -23,6 +25,9 @@ import androidx.compose.ui.unit.dp
 import com.firentistfw.kindlehighlights.R
 import com.firentistfw.kindlehighlights.common.DataState
 import com.firentistfw.kindlehighlights.storage.model.CompleteHighlight
+import com.firentistfw.kindlehighlights.storage.tables.DBCategory
+import com.firentistfw.kindlehighlights.ui.common.KHButton
+import com.firentistfw.kindlehighlights.ui.common.KHButtonType
 import com.firentistfw.kindlehighlights.ui.styles.KHColors
 import com.firentistfw.kindlehighlights.ui.styles.KHSpacings
 import com.firentistfw.kindlehighlights.ui.styles.KHTextStyles
@@ -57,7 +62,20 @@ private fun LoadedBody(
         Divider()
         BookSection("Jeff Olson", "Slight Edge")
         DateSection("May 28, 2023")
-        SectionHeader("Categories", R.drawable.ic_label)
+        CategoriesSection(listOf())
+        KHButton(
+            text = "Manage categories",
+            onClick = {
+                // FIXME Implement
+            }
+        )
+        KHButton(
+            text = "Remove highlight",
+            type = KHButtonType.Danger,
+            onClick = {
+                // FIXME Implement
+            }
+        )
     }
 }
 
@@ -101,6 +119,25 @@ private fun DateSection(date: String) {
             text = date,
             style = KHTextStyles.content,
         )
+    }
+}
+
+@Composable
+private fun CategoriesSection(categories: List<DBCategory>) {
+    Column(
+        verticalArrangement = Arrangement.spacedBy(KHSpacings.m)
+    ) {
+        SectionHeader("Categories", R.drawable.ic_label)
+        LazyColumn(
+            verticalArrangement = Arrangement.spacedBy(KHSpacings.m)
+        ) {
+            itemsIndexed(categories) { index, item ->
+                Text(
+                    text = "- ${item.name}",
+                    style = KHTextStyles.content,
+                )
+            }
+        }
     }
 }
 

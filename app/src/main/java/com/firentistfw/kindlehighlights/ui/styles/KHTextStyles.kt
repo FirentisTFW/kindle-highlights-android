@@ -20,6 +20,7 @@ object KHTextStyles {
     val content = TextStyle(
         fontFamily = robotoFontFamily,
         fontSize = 16.sp,
+        fontStyle = FontStyle.Normal,
         fontWeight = FontWeight.W400,
         letterSpacing = 0.05.sp,
         color = KHColors.black,
