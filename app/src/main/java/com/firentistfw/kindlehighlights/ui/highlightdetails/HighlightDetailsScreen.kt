@@ -20,6 +20,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.firentistfw.kindlehighlights.R
@@ -64,13 +65,13 @@ private fun LoadedBody(
         DateSection("May 28, 2023")
         CategoriesSection(listOf())
         KHButton(
-            text = "Manage categories",
+            text = stringResource(R.string.highlightDetails_manageCategoriesButton),
             onClick = {
                 // FIXME Implement
             }
         )
         KHButton(
-            text = "Remove highlight",
+            text = stringResource(R.string.highlightDetails_removeHighlightButton),
             type = KHButtonType.Danger,
             onClick = {
                 // FIXME Implement
@@ -84,7 +85,7 @@ private fun QuoteSection(quote: String) {
     Column(
         verticalArrangement = Arrangement.spacedBy(KHSpacings.m)
     ) {
-        SectionHeader("Quote", R.drawable.ic_open_book)
+        SectionHeader(stringResource(R.string.highlightDetails_quote), R.drawable.ic_open_book)
         Text(
             text = quote,
             style = KHTextStyles.quote,
@@ -97,7 +98,7 @@ private fun BookSection(authorName: String, bookTitle: String) {
     Column(
         verticalArrangement = Arrangement.spacedBy(KHSpacings.m)
     ) {
-        SectionHeader("Book", R.drawable.ic_open_book)
+        SectionHeader(stringResource(R.string.highlightDetails_book), R.drawable.ic_open_book)
         Text(
             text = authorName,
             style = KHTextStyles.content,
@@ -114,7 +115,7 @@ private fun DateSection(date: String) {
     Column(
         verticalArrangement = Arrangement.spacedBy(KHSpacings.m)
     ) {
-        SectionHeader("Date", R.drawable.ic_calendar)
+        SectionHeader(stringResource(R.string.highlightDetails_quote), R.drawable.ic_calendar)
         Text(
             text = date,
             style = KHTextStyles.content,
@@ -127,17 +128,23 @@ private fun CategoriesSection(categories: List<DBCategory>) {
     Column(
         verticalArrangement = Arrangement.spacedBy(KHSpacings.m)
     ) {
-        SectionHeader("Categories", R.drawable.ic_label)
-        LazyColumn(
-            verticalArrangement = Arrangement.spacedBy(KHSpacings.m)
-        ) {
-            itemsIndexed(categories) { index, item ->
-                Text(
-                    text = "- ${item.name}",
-                    style = KHTextStyles.content,
-                )
+        SectionHeader(stringResource(R.string.highlightDetails_categories), R.drawable.ic_label)
+        if (categories.isEmpty())
+            Text(
+                text = stringResource(R.string.highlightDetails_noCategoriesAssigned),
+                style = KHTextStyles.content,
+            )
+        else
+            LazyColumn(
+                verticalArrangement = Arrangement.spacedBy(KHSpacings.m)
+            ) {
+                itemsIndexed(categories) { index, item ->
+                    Text(
+                        text = "- ${item.name}",
+                        style = KHTextStyles.content,
+                    )
+                }
             }
-        }
     }
 }
 
