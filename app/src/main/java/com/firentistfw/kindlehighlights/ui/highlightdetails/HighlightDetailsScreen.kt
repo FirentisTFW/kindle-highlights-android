@@ -21,7 +21,6 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.firentistfw.kindlehighlights.R
 import com.firentistfw.kindlehighlights.common.DataState
@@ -32,25 +31,30 @@ import com.firentistfw.kindlehighlights.ui.common.KHButtonType
 import com.firentistfw.kindlehighlights.ui.styles.KHColors
 import com.firentistfw.kindlehighlights.ui.styles.KHSpacings
 import com.firentistfw.kindlehighlights.ui.styles.KHTextStyles
-
-// FIXME Finish this screen
+import java.util.UUID
 
 @Composable
 fun HighlightDetailsScreen(
     state: DataState<CompleteHighlight>,
+    onManageCategoriesClick: (highlightId: UUID) -> Unit,
+    onRemoveHighlightClick: (highlightId: UUID) -> Unit,
 ) {
     when (state) {
         is DataState.Error -> Text(text = "An error occurred", modifier = Modifier.fillMaxSize())
         is DataState.Loading -> CircularProgressIndicator()
-        is DataState.Success -> LoadedBody()
-//        is DataState.Success -> LoadedBody(state.data)
+        is DataState.Success -> LoadedBody(
+            state.data,
+            onManageCategoriesClick = onManageCategoriesClick,
+            onRemoveHighlightClick = onRemoveHighlightClick,
+        )
     }
 }
 
 @Composable
-@Preview
 private fun LoadedBody(
-//    highlight: CompleteHighlight,
+    highlight: CompleteHighlight,
+    onManageCategoriesClick: (highlightId: UUID) -> Unit,
+    onRemoveHighlightClick: (highlightId: UUID) -> Unit,
 ) {
     Column(
         modifier = Modifier
@@ -59,24 +63,20 @@ private fun LoadedBody(
             .padding(KHSpacings.xl),
         verticalArrangement = Arrangement.spacedBy(KHSpacings.l)
     ) {
-        QuoteSection(quote = "80% of success is showing up every day")
+        QuoteSection(quote = highlight.highlight.content)
         Divider()
-        BookSection("Jeff Olson", "Slight Edge")
-        DateSection("May 28, 2023")
+        BookSection(highlight.book.author, highlight.book.title)
+        DateSection(highlight.highlight.date)
         CategoriesSection(listOf())
-        KHButton(
-            text = stringResource(R.string.highlightDetails_manageCategoriesButton),
+        KHButton(text = stringResource(R.string.highlightDetails_manageCategoriesButton),
             onClick = {
-                // FIXME Implement
-            }
-        )
-        KHButton(
-            text = stringResource(R.string.highlightDetails_removeHighlightButton),
+                onManageCategoriesClick(highlight.highlight.highlightId)
+            })
+        KHButton(text = stringResource(R.string.highlightDetails_removeHighlightButton),
             type = KHButtonType.Danger,
             onClick = {
-                // FIXME Implement
-            }
-        )
+                onRemoveHighlightClick(highlight.highlight.highlightId)
+            })
     }
 }
 
@@ -129,22 +129,20 @@ private fun CategoriesSection(categories: List<DBCategory>) {
         verticalArrangement = Arrangement.spacedBy(KHSpacings.m)
     ) {
         SectionHeader(stringResource(R.string.highlightDetails_categories), R.drawable.ic_label)
-        if (categories.isEmpty())
-            Text(
-                text = stringResource(R.string.highlightDetails_noCategoriesAssigned),
-                style = KHTextStyles.content,
-            )
-        else
-            LazyColumn(
-                verticalArrangement = Arrangement.spacedBy(KHSpacings.m)
-            ) {
-                itemsIndexed(categories) { index, item ->
-                    Text(
-                        text = "- ${item.name}",
-                        style = KHTextStyles.content,
-                    )
-                }
+        if (categories.isEmpty()) Text(
+            text = stringResource(R.string.highlightDetails_noCategoriesAssigned),
+            style = KHTextStyles.content,
+        )
+        else LazyColumn(
+            verticalArrangement = Arrangement.spacedBy(KHSpacings.m)
+        ) {
+            itemsIndexed(categories) { index, item ->
+                Text(
+                    text = "- ${item.name}",
+                    style = KHTextStyles.content,
+                )
             }
+        }
     }
 }
 
@@ -159,8 +157,7 @@ private fun SectionHeader(
         Image(
             painter = painterResource(id = drawableRes),
             contentDescription = title,
-            modifier = Modifier
-                .size(24.dp)
+            modifier = Modifier.size(24.dp)
         )
         Box(modifier = Modifier.width(KHSpacings.m))
         Text(
