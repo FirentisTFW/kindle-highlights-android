@@ -26,6 +26,7 @@ import com.firentistfw.kindlehighlights.R
 import com.firentistfw.kindlehighlights.common.DataState
 import com.firentistfw.kindlehighlights.storage.model.CompleteHighlight
 import com.firentistfw.kindlehighlights.storage.tables.DBCategory
+import com.firentistfw.kindlehighlights.storage.tables.DBHighlight
 import com.firentistfw.kindlehighlights.ui.common.KHButton
 import com.firentistfw.kindlehighlights.ui.common.KHButtonType
 import com.firentistfw.kindlehighlights.ui.styles.KHColors
@@ -35,15 +36,17 @@ import java.util.UUID
 
 @Composable
 fun HighlightDetailsScreen(
-    state: DataState<CompleteHighlight>,
+    state: DataState<CompleteHighlight>?,
+    categories: List<DBCategory>,
     onManageCategoriesClick: (highlightId: UUID) -> Unit,
-    onRemoveHighlightClick: (highlightId: UUID) -> Unit,
+    onRemoveHighlightClick: (highlight: DBHighlight) -> Unit,
 ) {
     when (state) {
         is DataState.Error -> Text(text = "An error occurred", modifier = Modifier.fillMaxSize())
-        is DataState.Loading -> CircularProgressIndicator()
+        is DataState.Loading, null -> CircularProgressIndicator()
         is DataState.Success -> LoadedBody(
             state.data,
+            categories,
             onManageCategoriesClick = onManageCategoriesClick,
             onRemoveHighlightClick = onRemoveHighlightClick,
         )
@@ -53,8 +56,9 @@ fun HighlightDetailsScreen(
 @Composable
 private fun LoadedBody(
     highlight: CompleteHighlight,
+    categories: List<DBCategory>,
     onManageCategoriesClick: (highlightId: UUID) -> Unit,
-    onRemoveHighlightClick: (highlightId: UUID) -> Unit,
+    onRemoveHighlightClick: (highlight: DBHighlight) -> Unit,
 ) {
     Column(
         modifier = Modifier
@@ -67,7 +71,7 @@ private fun LoadedBody(
         Divider()
         BookSection(highlight.book.author, highlight.book.title)
         DateSection(highlight.highlight.date)
-        CategoriesSection(listOf())
+        CategoriesSection(categories)
         KHButton(text = stringResource(R.string.highlightDetails_manageCategoriesButton),
             onClick = {
                 onManageCategoriesClick(highlight.highlight.highlightId)
@@ -75,7 +79,7 @@ private fun LoadedBody(
         KHButton(text = stringResource(R.string.highlightDetails_removeHighlightButton),
             type = KHButtonType.Danger,
             onClick = {
-                onRemoveHighlightClick(highlight.highlight.highlightId)
+                onRemoveHighlightClick(highlight.highlight)
             })
     }
 }

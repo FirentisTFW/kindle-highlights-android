@@ -2,25 +2,19 @@ package com.firentistfw.kindlehighlights.ui.highlightdetails
 
 import android.app.AlertDialog
 import android.os.Bundle
-import android.util.Log
-import android.view.View
-import androidx.core.content.ContextCompat
-import androidx.lifecycle.lifecycleScope
+import androidx.activity.compose.setContent
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.livedata.observeAsState
 import com.firentistfw.kindlehighlights.R
 import com.firentistfw.kindlehighlights.common.BaseActivity
-import com.firentistfw.kindlehighlights.common.DataState
-import com.firentistfw.kindlehighlights.databinding.ActivityHighlightDetailsBinding
-import com.firentistfw.kindlehighlights.storage.model.CompleteHighlight
 import com.firentistfw.kindlehighlights.storage.tables.DBHighlight
-import com.firentistfw.kindlehighlights.storage.tables.authorAndTitleDisplay
 import com.firentistfw.kindlehighlights.ui.managehighlightcategories.ManageHighlightCategoriesBottomSheetFragment
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import java.util.UUID
 
 class HighlightDetailsActivity : BaseActivity() {
     private val viewModel: HighlightDetailsViewModel by viewModel()
-    private val tag = "HighlightDetailsActivity"
-    private lateinit var binding: ActivityHighlightDetailsBinding
 
     companion object {
         const val highlightIdKey = "highlight_id"
@@ -29,101 +23,47 @@ class HighlightDetailsActivity : BaseActivity() {
     private val highlightId: UUID
         get() {
             val id = intent.getStringExtra(highlightIdKey)
-
             return UUID.fromString(id)
         }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityHighlightDetailsBinding.inflate(layoutInflater)
-        setContentView(binding.root)
-
-        binding.divider.background = ContextCompat.getDrawable(this, R.drawable.divider)
-
-        initObservers()
 
         viewModel.fetchHighlight(highlightId)
         viewModel.fetchCategories(highlightId)
-    }
 
-    private fun initObservers() {
-        observeHighlight()
-        observeCategories()
-    }
-
-    private fun observeHighlight() {
-        viewModel.dataState.observe(this) { state ->
-            when (state) {
-                is DataState.Error -> {
-                    Log.d(tag, "An error occurred while fetching highlight")
-                    // TODO Show error state
-                }
-
-                is DataState.Loading -> {
-                    // TODO Show loading spinner
-                }
-
-                is DataState.Success -> {
-                    val highlight = state.data
-
-                    fillHighlightData(highlight)
-                    initButtonsInteractions(highlight)
-                }
-            }
+        setContent {
+            val state by viewModel.dataState.observeAsState()
+            val categories by viewModel.assignedCategories.collectAsState()
+            HighlightDetailsScreen(
+                state = state,
+                categories = categories,
+                onManageCategoriesClick = ::onManageCategoriesClick,
+                onRemoveHighlightClick = ::onRemoveHighlightClick,
+            )
         }
     }
 
-    private fun observeCategories() {
-        lifecycleScope.launchWhenStarted {
-            viewModel.assignedCategories.collect { categories ->
-                val categoriesText =
-                    if (categories.isEmpty()) getString(R.string.highlightDetails_noCategoriesAssigned)
-                    else categories.joinToString("\n") {
-                        "- ${it.name}"
-                    }
-
-                binding.tvAssignedCategories.text = categoriesText
-            }
-        }
+    private fun onManageCategoriesClick(highlightId: UUID) {
+        val categoriesBottomSheet =
+            ManageHighlightCategoriesBottomSheetFragment(highlightId)
+        categoriesBottomSheet.show(supportFragmentManager, categoriesBottomSheet.tag)
     }
 
-    private fun fillHighlightData(highlight: CompleteHighlight) {
-        binding.tvQuote.text = highlight.highlight.content
-
-        val note = highlight.highlight.note
-        if (note.isNullOrBlank()) {
-            binding.tvNote.visibility = View.GONE
-            binding.llNoteHeader.visibility = View.GONE
-        } else {
-            binding.tvNote.text = note
-        }
-
-        binding.tvBook.text = highlight.book.authorAndTitleDisplay
-        binding.tvDate.text = highlight.highlight.date
+    private fun onRemoveHighlightClick(highlight: DBHighlight) {
+        showRemoveHighlightConfirmationDialog(highlight)
     }
 
-    private fun initButtonsInteractions(highlight: CompleteHighlight) {
-        binding.btnManageCategories.setOnClickListener {
-            val categoriesBottomSheet =
-                ManageHighlightCategoriesBottomSheetFragment(highlight.highlight.highlightId)
-            categoriesBottomSheet.show(supportFragmentManager, categoriesBottomSheet.tag)
-        }
-
-        binding.btnRemoveHighlight.setOnClickListener {
-            showDeleteHighlightConfirmationDialog(highlight)
-        }
-    }
-
-    private fun showDeleteHighlightConfirmationDialog(highlight: CompleteHighlight) {
+    private fun showRemoveHighlightConfirmationDialog(highlight: DBHighlight) {
         AlertDialog.Builder(this)
             .setTitle(R.string.highlightDetails_removeHighlightConfirmationDialog_title)
             .setMessage(R.string.highlightDetails_removeHighlightConfirmationDialog_message)
-            .setPositiveButton(R.string.common_yes) { _, _ -> deleteHighlight(highlight.highlight) }
+            .setPositiveButton(R.string.common_yes) { _, _ -> removeHighlight(highlight) }
             .setNegativeButton(R.string.common_no, null)
             .show()
     }
 
-    private fun deleteHighlight(highlight: DBHighlight) {
+    private fun removeHighlight(highlight: DBHighlight) {
         viewModel.deleteHighlight(highlight)
         finish()
         // TODO Update highlight list (as one of its items could've just been deleted)
